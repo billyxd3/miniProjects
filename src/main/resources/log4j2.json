@@ -1,0 +1,36 @@
+{
+  "configurration": {
+    "name": "Json_Log4j2_Config",
+    "packages": "com.softserve",
+    "properties": {
+      "property": {
+        "name": "log-path",
+        "value": "logs"
+      }
+    },
+
+    "appenders": {
+      "Console": {
+        "name": "Console_Appender",
+        "PatternLayout": {
+          "pattern": "%highlight{%-5level}{FATAL=bg_red} %style{%date{yyyy-MM-dd-HH:mm:ss.SSS}}{blue} %class{1}:%L - %highlight{%msg} %xEx{short}%n"
+        }
+      }
+    },
+
+    "loggers": {
+      "root": {
+        "level": "all"
+      },
+      "logger": {
+        "name": "com.softserve",
+        "level": "all",
+        "AppenderRef": [
+          {
+            "ref": "Console_Appender"
+          }
+        ]
+      }
+    }
+  }
+}
