@@ -4,24 +4,24 @@ import java.util.Date;
 
 public class History {
     private Integer id;
-    private Integer taskID;
+    private Task task;
     private Date modifiedDate;
-    private Integer statusID;
+    private String status;
 
     public  History() {
     }
 
-    public History(Integer taskID, Date modifiedDate, Integer statusID) {
-        this.taskID = taskID;
+    public History(Task task, Date modifiedDate, String status) {
+        this.task = task;
         this.modifiedDate = modifiedDate;
-        this.statusID = statusID;
+        this.status = status;
     }
 
-    public History(Integer id, Integer taskID, Date modifiedDate, Integer statusID) {
+    public History(Integer id, Task task, Date modifiedDate, String status) {
         this.id = id;
-        this.taskID = taskID;
+        this.task = task;
         this.modifiedDate = modifiedDate;
-        this.statusID = statusID;
+        this.status = status;
     }
 
     public Integer getId() {
@@ -32,12 +32,12 @@ public class History {
         this.id = id;
     }
 
-    public Integer getTaskID() {
-        return taskID;
+    public Task getTask() {
+        return task;
     }
 
-    public void setTaskID(Integer taskID) {
-        this.taskID = taskID;
+    public void setTask(Task task) {
+        this.task = task;
     }
 
     public Date getModifiedDate() {
@@ -48,11 +48,11 @@ public class History {
         this.modifiedDate = modifiedDate;
     }
 
-    public Integer getStatusID() {
-        return statusID;
+    public String getStatus() {
+        return status;
     }
 
-    public void setStatusID(Integer statusID) {
-        this.statusID = statusID;
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
