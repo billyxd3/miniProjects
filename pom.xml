@@ -35,6 +35,11 @@
             <artifactId>jackson-databind</artifactId>
             <version>2.9.4</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.maven.archetypes</groupId>
+            <artifactId>maven-archetype-webapp</artifactId>
+            <version>1.4</version>
+        </dependency>
     </dependencies>
 
     <reporting>
