@@ -3,60 +3,39 @@ package com.itacademy.softserve.dto;
 import java.util.Date;
 
 public class Task {
-    private Integer id;
-    private Integer assigneeID;
-    private Integer ownerID;
+    private String assignee;
+    private String owner;
     private String taskDescription;
     private Date creationDate;
     private Date deadline;
-    private Integer statusID;
+    private String status;
 
     public Task() {
     }
 
-    public Task(Integer assigneeID, Integer ownerID, String taskDescription,
-                Date creationDate, Date deadline, Integer statusID) {
-        this.assigneeID = assigneeID;
-        this.ownerID = ownerID;
+    public Task(String assignee, String owner, String taskDescription, Date creationDate, Date deadline, String status) {
+        this.assignee = assignee;
+        this.owner = owner;
         this.taskDescription = taskDescription;
         this.creationDate = creationDate;
         this.deadline = deadline;
-        this.statusID = statusID;
+        this.status = status;
     }
 
-    public Task(Integer id, Integer assigneeID, Integer ownerID, String taskDescription,
-                Date creationDate, Date deadline, Integer statusID) {
-        this.id = id;
-        this.assigneeID = assigneeID;
-        this.ownerID = ownerID;
-        this.taskDescription = taskDescription;
-        this.creationDate = creationDate;
-        this.deadline = deadline;
-        this.statusID = statusID;
+    public String getAssignee() {
+        return assignee;
     }
 
-    public Integer getId() {
-        return id;
+    public void setAssignee(String assignee) {
+        this.assignee = assignee;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public String getOwner() {
+        return owner;
     }
 
-    public Integer getAssigneeID() {
-        return assigneeID;
-    }
-
-    public void setAssigneeID(Integer assigneeID) {
-        this.assigneeID = assigneeID;
-    }
-
-    public Integer getOwnerID() {
-        return ownerID;
-    }
-
-    public void setOwnerID(Integer ownerID) {
-        this.ownerID = ownerID;
+    public void setOwner(String owner) {
+        this.owner = owner;
     }
 
     public String getTaskDescription() {
@@ -83,11 +62,11 @@ public class Task {
         this.deadline = deadline;
     }
 
-    public Integer getStatusID() {
-        return statusID;
+    public String getStatus() {
+        return status;
     }
 
-    public void setStatusID(Integer statusID) {
-        this.statusID = statusID;
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

@@ -1,7 +1,6 @@
 package com.itacademy.softserve.dto;
 
 public class User {
-    private Integer id;
     private String name;
     private String password;
 
@@ -11,20 +10,6 @@ public class User {
     public User(String name, String password) {
         this.name = name;
         this.password = password;
-    }
-
-    public User(Integer id, String name, String password) {
-        this.id = id;
-        this.name = name;
-        this.password = password;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getName() {
