@@ -3,7 +3,7 @@ package com.itacademy.softserve.dto;
 import java.util.Date;
 
 public class History {
-    private Integer id;
+    private Long id;
     private Task task;
     private Date modifiedDate;
     private String status;
@@ -17,18 +17,18 @@ public class History {
         this.status = status;
     }
 
-    public History(Integer id, Task task, Date modifiedDate, String status) {
+    public History(Long id, Task task, Date modifiedDate, String status) {
         this.id = id;
         this.task = task;
         this.modifiedDate = modifiedDate;
         this.status = status;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

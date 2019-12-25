@@ -3,23 +3,43 @@ package com.itacademy.softserve.dto;
 import java.util.Date;
 
 public class Task {
+    private Long taskID;
     private String assignee;
     private String owner;
     private String taskDescription;
     private Date creationDate;
     private Date deadline;
-    private String status;
+    private Integer statusID;
 
     public Task() {
     }
 
-    public Task(String assignee, String owner, String taskDescription, Date creationDate, Date deadline, String status) {
+    public Task(String assignee, String owner, String taskDescription, Date creationDate, Date deadline, Integer statusID) {
         this.assignee = assignee;
         this.owner = owner;
         this.taskDescription = taskDescription;
         this.creationDate = creationDate;
         this.deadline = deadline;
-        this.status = status;
+        this.statusID = statusID;
+    }
+
+    public Task(Long taskID, String assignee, String owner, String taskDescription,
+                Date creationDate, Date deadline, Integer statusID) {
+        this.taskID = taskID;
+        this.assignee = assignee;
+        this.owner = owner;
+        this.taskDescription = taskDescription;
+        this.creationDate = creationDate;
+        this.deadline = deadline;
+        this.statusID = statusID;
+    }
+
+    public Long getTaskID() {
+        return taskID;
+    }
+
+    public void setTaskID(Long taskID) {
+        this.taskID = taskID;
     }
 
     public String getAssignee() {
@@ -62,11 +82,11 @@ public class Task {
         this.deadline = deadline;
     }
 
-    public String getStatus() {
-        return status;
+    public Integer getStatusID() {
+        return statusID;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setStatusID(Integer statusID) {
+        this.statusID = statusID;
     }
 }
