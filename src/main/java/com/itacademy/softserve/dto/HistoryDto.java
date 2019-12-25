@@ -2,22 +2,22 @@ package com.itacademy.softserve.dto;
 
 import java.util.Date;
 
-public class History {
+public class HistoryDto {
     private Long id;
-    private Task task;
+    private TaskDto task;
     private Date modifiedDate;
     private String status;
 
-    public  History() {
+    public HistoryDto() {
     }
 
-    public History(Task task, Date modifiedDate, String status) {
+    public HistoryDto(TaskDto task, Date modifiedDate, String status) {
         this.task = task;
         this.modifiedDate = modifiedDate;
         this.status = status;
     }
 
-    public History(Long id, Task task, Date modifiedDate, String status) {
+    public HistoryDto(Long id, TaskDto task, Date modifiedDate, String status) {
         this.id = id;
         this.task = task;
         this.modifiedDate = modifiedDate;
@@ -32,11 +32,11 @@ public class History {
         this.id = id;
     }
 
-    public Task getTask() {
+    public TaskDto getTask() {
         return task;
     }
 
-    public void setTask(Task task) {
+    public void setTask(TaskDto task) {
         this.task = task;
     }
 

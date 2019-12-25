@@ -1,13 +1,13 @@
 package com.itacademy.softserve.dto;
 
-public class User {
+public class UserDto {
     private String name;
     private String password;
 
-    public User() {
+    public UserDto() {
     }
 
-    public User(String name, String password) {
+    public UserDto(String name, String password) {
         this.name = name;
         this.password = password;
     }

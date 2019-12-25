@@ -2,7 +2,7 @@ package com.itacademy.softserve.dto;
 
 import java.util.Date;
 
-public class Task {
+public class TaskDto {
     private Long taskID;
     private String assignee;
     private String owner;
@@ -11,10 +11,10 @@ public class Task {
     private Date deadline;
     private Integer statusID;
 
-    public Task() {
+    public TaskDto() {
     }
 
-    public Task(String assignee, String owner, String taskDescription, Date creationDate, Date deadline, Integer statusID) {
+    public TaskDto(String assignee, String owner, String taskDescription, Date creationDate, Date deadline, Integer statusID) {
         this.assignee = assignee;
         this.owner = owner;
         this.taskDescription = taskDescription;
@@ -23,8 +23,8 @@ public class Task {
         this.statusID = statusID;
     }
 
-    public Task(Long taskID, String assignee, String owner, String taskDescription,
-                Date creationDate, Date deadline, Integer statusID) {
+    public TaskDto(Long taskID, String assignee, String owner, String taskDescription,
+                   Date creationDate, Date deadline, Integer statusID) {
         this.taskID = taskID;
         this.assignee = assignee;
         this.owner = owner;
