@@ -2,7 +2,7 @@ package com.itacademy.softserve.entity;
 
 import java.util.Date;
 
-public class History extends Entity{
+public class History extends Entity {
     private Long taskID;
     private Date modifiedDate;
     private Integer statusID;

@@ -3,7 +3,7 @@ package com.itacademy.softserve.entity;
 import java.util.Date;
 import java.util.Objects;
 
-public class Task extends Entity{
+public class Task extends Entity {
     private User assignee;
     private User owner;
     private String taskDescription;

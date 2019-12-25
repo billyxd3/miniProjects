@@ -2,7 +2,7 @@ package com.itacademy.softserve.entity;
 
 import java.util.Objects;
 
-public class User extends Entity{
+public class User extends Entity {
     private String name;
     private String password;
 

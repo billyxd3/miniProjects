@@ -2,7 +2,7 @@ package com.itacademy.softserve.entity;
 
 import java.util.Objects;
 
-public class Status extends Entity{
+public class Status extends Entity {
     private String name;
 
     public Status() {
