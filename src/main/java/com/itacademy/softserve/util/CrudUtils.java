@@ -6,8 +6,9 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Optional;
 
-public class CrudUtils {
+public class CrudUtils<T> {
     public int update(Connection connection, String query, Object... args) {
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             setArgsToStatement(preparedStatement, args);
@@ -16,6 +17,15 @@ public class CrudUtils {
             throw new RuntimeException();
         }
     }
+
+//    public Optional<T> getByID(Connection connection, String query, Object... args) {
+//        try(PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+//            setArgsToStatement(preparedStatement, args);
+//
+//        } catch (SQLException e) {
+//            throw new RuntimeException();
+//        }
+//    }
 
     private void setArgsToStatement(PreparedStatement preparedStatement, Object... args) {
         try {
@@ -31,7 +41,7 @@ public class CrudUtils {
                 } else if (Date.class.equals(args[i].getClass())) {
                     preparedStatement.setDate(i + 1, (Date) args[i]);
                 } else {
-                    //throw custom error
+                    //throw custom exception
                 }
             }
         } catch (SQLException e) {

@@ -1,6 +1,7 @@
 package com.itacademy.softserve.entity;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class History extends Entity {
     private Long taskID;
@@ -45,6 +46,24 @@ public class History extends Entity {
 
     public void setStatusID(Integer statusID) {
         this.statusID = statusID;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        History history = (History) o;
+        if (!Objects.equals(taskID, history.taskID)) return false;
+        return Objects.equals(statusID, history.statusID);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (taskID != null ? taskID.hashCode() : 0);
+        result = 31 * result + (statusID != null ? statusID.hashCode() : 0);
+        return result;
     }
 
     @Override

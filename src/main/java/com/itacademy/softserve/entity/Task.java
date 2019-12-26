@@ -4,8 +4,8 @@ import java.util.Date;
 import java.util.Objects;
 
 public class Task extends Entity {
-    private User assignee;
-    private User owner;
+    private Integer assigneeID;
+    private Integer ownerID;
     private String taskDescription;
     private Date creationDate;
     private Date deadline;
@@ -14,41 +14,41 @@ public class Task extends Entity {
     public Task() {
     }
 
-    public Task(User assignee, User owner, String taskDescription,
+    public Task(Integer assigneeID, Integer ownerID, String taskDescription,
                 Date creationDate, Date deadline, Integer statusID) {
-        this.assignee = assignee;
-        this.owner = owner;
+        this.assigneeID = assigneeID;
+        this.ownerID = ownerID;
         this.taskDescription = taskDescription;
         this.creationDate = creationDate;
         this.deadline = deadline;
         this.statusID = statusID;
     }
 
-    public Task(Long id, User assignee, User owner, String taskDescription,
+    public Task(Long id, Integer assigneeID, Integer ownerID, String taskDescription,
                 Date creationDate, Date deadline, Integer statusID) {
         super(id);
-        this.assignee = assignee;
-        this.owner = owner;
+        this.assigneeID = assigneeID;
+        this.ownerID = ownerID;
         this.taskDescription = taskDescription;
         this.creationDate = creationDate;
         this.deadline = deadline;
         this.statusID = statusID;
     }
 
-    public User getAssignee() {
-        return assignee;
+    public Integer getAssigneeID() {
+        return assigneeID;
     }
 
-    public void setAssignee(User assignee) {
-        this.assignee = assignee;
+    public void setAssigneeID(Integer assigneeID) {
+        this.assigneeID = assigneeID;
     }
 
-    public User getOwner() {
-        return owner;
+    public Integer getOwnerID() {
+        return ownerID;
     }
 
-    public void setOwner(User owner) {
-        this.owner = owner;
+    public void setOwnerID(Integer ownerID) {
+        this.ownerID = ownerID;
     }
 
     public String getTaskDescription() {
@@ -91,8 +91,8 @@ public class Task extends Entity {
 
         Task task = (Task) o;
 
-        if (!Objects.equals(assignee, task.assignee)) return false;
-        if (!Objects.equals(owner, task.owner)) return false;
+        if (!Objects.equals(assigneeID, task.assigneeID)) return false;
+        if (!Objects.equals(ownerID, task.ownerID)) return false;
         if (!Objects.equals(taskDescription, task.taskDescription))
             return false;
         if (!Objects.equals(creationDate, task.creationDate)) return false;
@@ -103,8 +103,8 @@ public class Task extends Entity {
     @Override
     public int hashCode() {
         int result = super.hashCode();
-        result = 31 * result + (assignee != null ? assignee.hashCode() : 0);
-        result = 31 * result + (owner != null ? owner.hashCode() : 0);
+        result = 31 * result + (assigneeID != null ? assigneeID.hashCode() : 0);
+        result = 31 * result + (ownerID != null ? ownerID.hashCode() : 0);
         result = 31 * result + (taskDescription != null ? taskDescription.hashCode() : 0);
         result = 31 * result + (creationDate != null ? creationDate.hashCode() : 0);
         result = 31 * result + (deadline != null ? deadline.hashCode() : 0);
@@ -115,8 +115,8 @@ public class Task extends Entity {
     @Override
     public String toString() {
         return "Task{" +
-                "assignee=" + assignee +
-                ", owner=" + owner +
+                "assignee=" + assigneeID +
+                ", owner=" + ownerID +
                 ", taskDescription='" + taskDescription + '\'' +
                 ", creationDate=" + creationDate +
                 ", deadline=" + deadline +
