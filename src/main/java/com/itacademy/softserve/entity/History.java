@@ -4,6 +4,33 @@ import java.util.Date;
 import java.util.Objects;
 
 public class History extends Entity {
+    public static enum HistoryEntityQueries {
+        GET_BY_ID(SqlQueries.GET_BY_ID, ""),
+        GET_BY_FIELD(SqlQueries.GET_BY_FIELD, ""),
+        GET_ALL(SqlQueries.GET_ALL, ""),
+        INSERT(SqlQueries.INSERT, ""),
+        DELETE_BY_ID(SqlQueries.DELETE_BY_ID, ""),
+        DELETE_BY_FIELD(SqlQueries.DELETE_BY_FIELD, ""),
+        DELETE_ALL(SqlQueries.DELETE_ALL, "");
+
+        private SqlQueries sqlQueries;
+        private String query;
+
+        private HistoryEntityQueries(SqlQueries sqlQueries, String query) {
+            this.sqlQueries = sqlQueries;
+            this.query = query;
+        }
+
+        public SqlQueries getQuery() {
+            return sqlQueries;
+        }
+
+        @Override
+        public String toString() {
+            return query;
+        }
+    }
+
     private Long taskID;
     private Date modifiedDate;
     private Integer statusID;

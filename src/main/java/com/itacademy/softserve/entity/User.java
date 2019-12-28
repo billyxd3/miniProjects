@@ -3,6 +3,31 @@ package com.itacademy.softserve.entity;
 import java.util.Objects;
 
 public class User extends Entity {
+    public static enum UserEntityQueries {
+        GET_BY_ID(SqlQueries.GET_BY_ID, ""),
+        GET_BY_FIELD(SqlQueries.GET_BY_FIELD, ""),
+        INSERT(SqlQueries.INSERT, ""),
+        UPDATE_BY_ID(SqlQueries.UPDATE_BY_ID, ""),
+        UPDATE_BY_FIELD(SqlQueries.UPDATE_BY_FIELD, "");
+
+        private SqlQueries sqlQueries;
+        private String query;
+
+        private UserEntityQueries(SqlQueries sqlQueries, String query) {
+            this.sqlQueries = sqlQueries;
+            this.query = query;
+        }
+
+        public SqlQueries getQuery() {
+            return sqlQueries;
+        }
+
+        @Override
+        public String toString() {
+            return query;
+        }
+    }
+
     private String name;
     private String password;
 

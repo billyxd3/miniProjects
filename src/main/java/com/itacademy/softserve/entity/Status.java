@@ -3,6 +3,32 @@ package com.itacademy.softserve.entity;
 import java.util.Objects;
 
 public class Status extends Entity {
+    public static enum StatusEntityQueries {
+        GET_BY_ID(SqlQueries.GET_BY_ID, ""),
+        GET_BY_FIELD(SqlQueries.GET_BY_FIELD, ""),
+        INSERT(SqlQueries.INSERT, ""),
+        UPDATE_BY_ID(SqlQueries.UPDATE_BY_ID, ""),
+        UPDATE_BY_FIELD(SqlQueries.UPDATE_BY_FIELD, ""),
+        DELETE_BY_ID(SqlQueries.DELETE_BY_ID, ""),
+        DELETE_BY_FIELD(SqlQueries.DELETE_BY_FIELD, "");
+
+        private SqlQueries sqlQueries;
+        private String query;
+
+        private StatusEntityQueries(SqlQueries sqlQueries, String query) {
+            this.sqlQueries = sqlQueries;
+            this.query = query;
+        }
+
+        public SqlQueries getQuery() {
+            return sqlQueries;
+        }
+
+        @Override
+        public String toString() {
+            return query;
+        }
+    }
     private String name;
 
     public Status() {

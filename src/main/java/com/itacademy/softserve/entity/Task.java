@@ -4,9 +4,35 @@ import java.util.Date;
 import java.util.Objects;
 
 public class Task extends Entity {
+    public static enum TaskEntityQueries {
+        GET_BY_ID(SqlQueries.GET_BY_ID, ""),
+        GET_BY_FIELD(SqlQueries.GET_BY_FIELD, ""),
+        GET_BY_REGEX(SqlQueries.GET_BY_REGEX, ""),
+        INSERT(SqlQueries.INSERT, ""),
+        DELETE_BY_ID(SqlQueries.DELETE_BY_ID, ""),
+        DELETE_BY_FIELD(SqlQueries.DELETE_BY_FIELD, "");
+
+        private SqlQueries sqlQueries;
+        private String query;
+
+        private TaskEntityQueries(SqlQueries sqlQueries, String query) {
+            this.sqlQueries = sqlQueries;
+            this.query = query;
+        }
+
+        public SqlQueries getQuery() {
+            return sqlQueries;
+        }
+
+        @Override
+        public String toString() {
+            return query;
+        }
+    }
+
     private Integer assigneeID;
     private Integer ownerID;
-    private String taskDescription;
+    private String description;
     private Date creationDate;
     private Date deadline;
     private Integer statusID;
@@ -14,22 +40,22 @@ public class Task extends Entity {
     public Task() {
     }
 
-    public Task(Integer assigneeID, Integer ownerID, String taskDescription,
+    public Task(Integer assigneeID, Integer ownerID, String description,
                 Date creationDate, Date deadline, Integer statusID) {
         this.assigneeID = assigneeID;
         this.ownerID = ownerID;
-        this.taskDescription = taskDescription;
+        this.description = description;
         this.creationDate = creationDate;
         this.deadline = deadline;
         this.statusID = statusID;
     }
 
-    public Task(Long id, Integer assigneeID, Integer ownerID, String taskDescription,
+    public Task(Long id, Integer assigneeID, Integer ownerID, String description,
                 Date creationDate, Date deadline, Integer statusID) {
         super(id);
         this.assigneeID = assigneeID;
         this.ownerID = ownerID;
-        this.taskDescription = taskDescription;
+        this.description = description;
         this.creationDate = creationDate;
         this.deadline = deadline;
         this.statusID = statusID;
@@ -51,12 +77,12 @@ public class Task extends Entity {
         this.ownerID = ownerID;
     }
 
-    public String getTaskDescription() {
-        return taskDescription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setTaskDescription(String taskDescription) {
-        this.taskDescription = taskDescription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Date getCreationDate() {
@@ -93,7 +119,7 @@ public class Task extends Entity {
 
         if (!Objects.equals(assigneeID, task.assigneeID)) return false;
         if (!Objects.equals(ownerID, task.ownerID)) return false;
-        if (!Objects.equals(taskDescription, task.taskDescription))
+        if (!Objects.equals(description, task.description))
             return false;
         if (!Objects.equals(creationDate, task.creationDate)) return false;
         if (!Objects.equals(deadline, task.deadline)) return false;
@@ -105,7 +131,7 @@ public class Task extends Entity {
         int result = super.hashCode();
         result = 31 * result + (assigneeID != null ? assigneeID.hashCode() : 0);
         result = 31 * result + (ownerID != null ? ownerID.hashCode() : 0);
-        result = 31 * result + (taskDescription != null ? taskDescription.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (creationDate != null ? creationDate.hashCode() : 0);
         result = 31 * result + (deadline != null ? deadline.hashCode() : 0);
         result = 31 * result + (statusID != null ? statusID.hashCode() : 0);
@@ -117,7 +143,7 @@ public class Task extends Entity {
         return "Task{" +
                 "assignee=" + assigneeID +
                 ", owner=" + ownerID +
-                ", taskDescription='" + taskDescription + '\'' +
+                ", taskDescription='" + description + '\'' +
                 ", creationDate=" + creationDate +
                 ", deadline=" + deadline +
                 ", statusID=" + statusID +
