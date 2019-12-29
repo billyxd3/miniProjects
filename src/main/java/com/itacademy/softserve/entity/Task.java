@@ -5,12 +5,16 @@ import java.util.Objects;
 
 public class Task extends Entity {
     public static enum TaskEntityQueries {
-        GET_BY_ID(SqlQueries.GET_BY_ID, ""),
-        GET_BY_FIELD(SqlQueries.GET_BY_FIELD, ""),
-        GET_BY_REGEX(SqlQueries.GET_BY_REGEX, ""),
-        INSERT(SqlQueries.INSERT, ""),
-        DELETE_BY_ID(SqlQueries.DELETE_BY_ID, ""),
-        DELETE_BY_FIELD(SqlQueries.DELETE_BY_FIELD, "");
+        GET_BY_ID(SqlQueries.GET_BY_ID, "SELECT TaskID, Assignee, Owner, TaskDescription, CreationDate," +
+                                               " Deadline, StatusID FROM tasks WHERE TaskID = ?;"),
+        GET_BY_FIELD(SqlQueries.GET_BY_FIELD, "SELECT TaskID, Assignee, Owner, TaskDescription," +
+                "           CreationDate, Deadline, StatusID FROM tasks WHERE Assignee = ? OR Owner = ?;"),
+        GET_BY_REGEX(SqlQueries.GET_BY_REGEX, "SELECT TaskID, Assignee, Owner, TaskDescription," +
+                " CreationDate, Deadline, StatusID FROM tasks WHERE TaskDescription LIKE '%?%';"),
+        INSERT(SqlQueries.INSERT, "INSERT INTO tasks (Assignee, Owner, TaskDescription, CreationDate, Deadline, StatusID) " +
+                "VALUES (?, ?, ?, ?, ?, ?);"),
+        UPDATE_BY_ID(SqlQueries.UPDATE_BY_ID, "UPDATE tasks SET StatusID = ? WHERE TaskID = ?;"),
+        UPDATE_BY_FIELD(SqlQueries.UPDATE_BY_FIELD, "UPDATE tasks SET Assignee = ? WHERE Owner = ?;");
 
         private SqlQueries sqlQueries;
         private String query;

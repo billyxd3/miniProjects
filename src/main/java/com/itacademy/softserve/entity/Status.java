@@ -4,13 +4,13 @@ import java.util.Objects;
 
 public class Status extends Entity {
     public static enum StatusEntityQueries {
-        GET_BY_ID(SqlQueries.GET_BY_ID, ""),
-        GET_BY_FIELD(SqlQueries.GET_BY_FIELD, ""),
-        INSERT(SqlQueries.INSERT, ""),
-        UPDATE_BY_ID(SqlQueries.UPDATE_BY_ID, ""),
-        UPDATE_BY_FIELD(SqlQueries.UPDATE_BY_FIELD, ""),
-        DELETE_BY_ID(SqlQueries.DELETE_BY_ID, ""),
-        DELETE_BY_FIELD(SqlQueries.DELETE_BY_FIELD, "");
+        GET_BY_ID(SqlQueries.GET_BY_ID, "SELECT StatusID, Name FROM statuses Where StatusID = ?;"),
+        GET_BY_FIELD(SqlQueries.GET_BY_FIELD, "SELECT StatusID, Name FROM statuses Where Name = ?;"),
+        INSERT(SqlQueries.INSERT, "INSERT INTO statuses (Name) VALUES (?);"),
+        UPDATE_BY_ID(SqlQueries.UPDATE_BY_ID, "UPDATE statuses SET Name = ? WHERE StatusID = ?;"),
+        UPDATE_BY_FIELD(SqlQueries.UPDATE_BY_FIELD, "UPDATE statuses SET Name = ? WHERE Name = ?;"),
+        DELETE_BY_ID(SqlQueries.DELETE_BY_ID, "DELETE FROM statuses WHERE StatusID = ?;"),
+        DELETE_BY_FIELD(SqlQueries.DELETE_BY_FIELD, "DELETE FROM statuses WHERE Name = ?;");
 
         private SqlQueries sqlQueries;
         private String query;

@@ -4,11 +4,11 @@ import java.util.Objects;
 
 public class User extends Entity {
     public static enum UserEntityQueries {
-        GET_BY_ID(SqlQueries.GET_BY_ID, ""),
-        GET_BY_FIELD(SqlQueries.GET_BY_FIELD, ""),
-        INSERT(SqlQueries.INSERT, ""),
-        UPDATE_BY_ID(SqlQueries.UPDATE_BY_ID, ""),
-        UPDATE_BY_FIELD(SqlQueries.UPDATE_BY_FIELD, "");
+        GET_BY_ID(SqlQueries.GET_BY_ID, "SELECT UserID, Name, Password FROM users WHERE UserID = ?;"),
+        GET_BY_FIELD(SqlQueries.GET_BY_FIELD, "SELECT UserID, Name, Password FROM users WHERE Name = ?;"),
+        INSERT(SqlQueries.INSERT, "INSERT INTO users (Name, Password) VALUES (?, ?);"),
+        UPDATE_BY_ID(SqlQueries.UPDATE_BY_ID, "UPDATE users SET Name = ?, Password = ? WHERE UserID = ?;"),
+        UPDATE_BY_FIELD(SqlQueries.UPDATE_BY_FIELD, "UPDATE users SET Name = ?, Password = ? WHERE Name = ?;");
 
         private SqlQueries sqlQueries;
         private String query;

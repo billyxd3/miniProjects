@@ -5,13 +5,13 @@ import java.util.Objects;
 
 public class History extends Entity {
     public static enum HistoryEntityQueries {
-        GET_BY_ID(SqlQueries.GET_BY_ID, ""),
-        GET_BY_FIELD(SqlQueries.GET_BY_FIELD, ""),
-        GET_ALL(SqlQueries.GET_ALL, ""),
-        INSERT(SqlQueries.INSERT, ""),
-        DELETE_BY_ID(SqlQueries.DELETE_BY_ID, ""),
-        DELETE_BY_FIELD(SqlQueries.DELETE_BY_FIELD, ""),
-        DELETE_ALL(SqlQueries.DELETE_ALL, "");
+        GET_BY_ID(SqlQueries.GET_BY_ID, "SELECT ID, TaskID, ModifiedDate, StatusID FROM history WHERE ID = ?;"),
+        GET_BY_FIELD(SqlQueries.GET_BY_FIELD, "SELECT ID, TaskID, ModifiedDate, StatusID FROM history WHERE TaskID = ?;"),
+        GET_ALL(SqlQueries.GET_ALL, "SELECT ID, TaskID, ModifiedDate, StatusID FROM history;"),
+        INSERT(SqlQueries.INSERT, "INSERT INTO history (TaskID, ModifiedDate, StatusID) VALUES (?, ?, ?);"),
+        DELETE_BY_ID(SqlQueries.DELETE_BY_ID, "DELETE FROM history WHERE ID = ?;"),
+        DELETE_BY_FIELD(SqlQueries.DELETE_BY_FIELD, "DELETE FROM history WHERE TaskID = ?;"),
+        DELETE_ALL(SqlQueries.DELETE_ALL, "TRUNCATE history;");
 
         private SqlQueries sqlQueries;
         private String query;

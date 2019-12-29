@@ -7,9 +7,9 @@ public interface IDaoCrud<TEntity> extends IDaoRead<TEntity> {
     boolean insert(TEntity createdObject);
     boolean updateByEntity(TEntity objectToUpdate);
     boolean updateByID(long id);
-    boolean updateByField();
+    boolean updateByField(Object fieldName, Object condition);
     boolean deleteByEntity(TEntity objectToUpdate);
     boolean deleteByID(long id);
-    boolean deleteByField(TEntity objectToUpdate);
+    boolean deleteByField(Object fieldName, Object condition);
 
 }

@@ -2,9 +2,17 @@ package com.itacademy.softserve.dao;
 
 import com.itacademy.softserve.entity.User;
 
-import java.util.List;
-import java.util.Optional;
+public class UserDao extends ADaoCrud<User> {
 
-public class UserDao {
+    @Override
+    protected void init() {
+        for(User.UserEntityQueries userEntityQueries : User.UserEntityQueries.values()) {
+            sqlQueries.put(userEntityQueries.getQuery(), userEntityQueries);
+        }
+    }
 
+    @Override
+    protected Object[] getFields(User entity) {
+        return new Object[0];
+    }
 }
