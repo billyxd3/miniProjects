@@ -5,16 +5,16 @@ import java.util.Objects;
 
 public class Task extends Entity {
     public static enum TaskEntityQueries {
-        GET_BY_ID(SqlQueries.GET_BY_ID, "SELECT TaskID, Assignee, Owner, TaskDescription, CreationDate," +
-                                               " Deadline, StatusID FROM tasks WHERE TaskID = ?;"),
-        GET_BY_FIELD(SqlQueries.GET_BY_FIELD, "SELECT TaskID, Assignee, Owner, TaskDescription," +
-                "           CreationDate, Deadline, StatusID FROM tasks WHERE Assignee = ? OR Owner = ?;"),
-        GET_BY_REGEX(SqlQueries.GET_BY_REGEX, "SELECT TaskID, Assignee, Owner, TaskDescription," +
-                " CreationDate, Deadline, StatusID FROM tasks WHERE TaskDescription LIKE '%?%';"),
-        INSERT(SqlQueries.INSERT, "INSERT INTO tasks (Assignee, Owner, TaskDescription, CreationDate, Deadline, StatusID) " +
+        GET_BY_ID(SqlQueries.GET_BY_ID, "SELECT TaskID, Assignee, Owner, Description, CreationDate," +
+                " Deadline, StatusID FROM tasks WHERE TaskID = ?;"),
+        GET_BY_FIELD(SqlQueries.GET_BY_FIELD, "SELECT TaskID, Assignee, Owner, Description," +
+                " CreationDate, Deadline, StatusID FROM tasks WHERE StatusID = ?;"),
+        GET_BY_REGEX(SqlQueries.GET_BY_REGEX, "SELECT TaskID, Assignee, Owner, Description," +
+                " CreationDate, Deadline, StatusID FROM tasks WHERE Description LIKE '%?%';"),
+        INSERT(SqlQueries.INSERT, "INSERT INTO tasks (Assignee, Owner, Description, CreationDate, Deadline, StatusID) " +
                 "VALUES (?, ?, ?, ?, ?, ?);"),
         UPDATE_BY_ID(SqlQueries.UPDATE_BY_ID, "UPDATE tasks SET StatusID = ? WHERE TaskID = ?;"),
-        UPDATE_BY_FIELD(SqlQueries.UPDATE_BY_FIELD, "UPDATE tasks SET Assignee = ? WHERE Owner = ?;");
+        UPDATE_BY_FIELD(SqlQueries.UPDATE_BY_FIELD, "UPDATE tasks SET ? = ? WHERE ? = ?;");
 
         private SqlQueries sqlQueries;
         private String query;
@@ -145,7 +145,8 @@ public class Task extends Entity {
     @Override
     public String toString() {
         return "Task{" +
-                "assignee=" + assigneeID +
+                "task_id = " + getId() +
+                ", assignee=" + assigneeID +
                 ", owner=" + ownerID +
                 ", taskDescription='" + description + '\'' +
                 ", creationDate=" + creationDate +

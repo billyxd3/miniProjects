@@ -1,13 +1,8 @@
 package com.itacademy.softserve.dao;
 
-import com.itacademy.softserve.db.ConnectionFactory;
 import com.itacademy.softserve.entity.Status;
 
-import java.sql.Connection;
-import java.util.List;
-import java.util.Optional;
-
-public class StatusDao extends ADaoCrud<Status> {
+public class StatusDao extends DaoCrudA<Status> {
 
     @Override
     protected void init() {
@@ -23,6 +18,5 @@ public class StatusDao extends ADaoCrud<Status> {
         fields[1] = entity.getName();
         return fields;
     }
-
 
 }

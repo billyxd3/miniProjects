@@ -1,7 +1,5 @@
 package com.itacademy.softserve.entity;
 
-import java.util.Objects;
-
 public class Status extends Entity {
     public static enum StatusEntityQueries {
         GET_BY_ID(SqlQueries.GET_BY_ID, "SELECT StatusID, Name FROM statuses Where StatusID = ?;"),
@@ -29,6 +27,7 @@ public class Status extends Entity {
             return query;
         }
     }
+
     private String name;
 
     public Status() {
@@ -70,7 +69,8 @@ public class Status extends Entity {
     @Override
     public String toString() {
         return "Status{" +
-                "name='" + name + '\'' +
+                "StatusID = " + getId() +
+                ", name='" + name + '\'' +
                 '}';
     }
 }

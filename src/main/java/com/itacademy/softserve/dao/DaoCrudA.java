@@ -8,8 +8,8 @@ import com.itacademy.softserve.util.CrudUtils;
 import java.sql.Connection;
 import java.util.Arrays;
 
-public abstract class ADaoCrud<TEntity extends Entity> extends ADaoRead<TEntity> implements IDaoCrud<TEntity> {
-    protected ADaoCrud() {
+public abstract class DaoCrudA<TEntity extends Entity> extends DaoReadA<TEntity> implements DaoCrudI<TEntity> {
+    protected DaoCrudA() {
         super();
     }
 
@@ -26,16 +26,16 @@ public abstract class ADaoCrud<TEntity extends Entity> extends ADaoRead<TEntity>
         return updateByID(objectToUpdate.getId());
     }
 
-    public boolean updateByID(long id) {
+    public boolean updateByID(Object... args) {
         Connection connection = ConnectionFactory.getConnectionFactory().getConnection();
-        int status = CrudUtils.update(connection, sqlQueries.get(SqlQueries.UPDATE_BY_ID).toString(), id);
+        int status = CrudUtils.update(connection, sqlQueries.get(SqlQueries.UPDATE_BY_ID).toString(), args);
         return status > 0;
     }
 
     @Override
-    public boolean updateByField(Object fieldName, Object condition) {
+    public boolean updateByField(Object... fieldsValues) {
         Connection connection = ConnectionFactory.getConnectionFactory().getConnection();
-        int status = CrudUtils.update(connection, sqlQueries.get(SqlQueries.UPDATE_BY_ID).toString(), fieldName, condition);
+        int status = CrudUtils.update(connection, sqlQueries.get(SqlQueries.UPDATE_BY_FIELD).toString(), fieldsValues);
         return status > 0;
     }
 
@@ -47,14 +47,14 @@ public abstract class ADaoCrud<TEntity extends Entity> extends ADaoRead<TEntity>
     @Override
     public boolean deleteByID(long id) {
         Connection connection = ConnectionFactory.getConnectionFactory().getConnection();
-        int status = CrudUtils.update(connection, sqlQueries.get(SqlQueries.UPDATE_BY_ID).toString(), id);
+        int status = CrudUtils.update(connection, sqlQueries.get(SqlQueries.DELETE_BY_ID).toString(), id);
         return status > 0;
     }
 
     @Override
-    public boolean deleteByField(Object fieldName, Object condition) {
+    public boolean deleteByField(Object... fieldsValues) {
         Connection connection = ConnectionFactory.getConnectionFactory().getConnection();
-        int status = CrudUtils.update(connection, sqlQueries.get(SqlQueries.UPDATE_BY_ID).toString(), fieldName, condition);
+        int status = CrudUtils.update(connection, sqlQueries.get(SqlQueries.DELETE_BY_FIELD).toString(), fieldsValues);
         return status > 0;
     }
 }

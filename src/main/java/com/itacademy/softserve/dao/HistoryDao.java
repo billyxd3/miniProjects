@@ -1,15 +1,13 @@
 package com.itacademy.softserve.dao;
 
-import com.itacademy.softserve.db.ConnectionFactory;
+import com.itacademy.softserve.builder.HistoryBuilder;
 import com.itacademy.softserve.entity.History;
-import com.itacademy.softserve.entity.SqlQueries;
-import com.itacademy.softserve.entity.Status;
-import com.itacademy.softserve.util.CrudUtils;
 
-import java.sql.Connection;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.List;
 
-
-public class HistoryDao extends ADaoCrud<History> {
+public class HistoryDao extends DaoCrudA<History> {
 
     @Override
     protected void init() {
@@ -20,12 +18,12 @@ public class HistoryDao extends ADaoCrud<History> {
 
     @Override
     protected Object[] getFields(History object) {
-        Object[] fields = new Object[4];
+        Object[] fields = new Object[5];
         fields[0] = object.getId();
         fields[1] = object.getTaskID();
         fields[2] = object.getModifiedDate();
         fields[3] = object.getStatusID();
+        fields[4] = object.getUserID();
         return fields;
     }
-
 }

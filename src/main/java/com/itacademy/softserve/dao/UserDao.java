@@ -1,8 +1,11 @@
 package com.itacademy.softserve.dao;
 
+import com.itacademy.softserve.builder.UserBuilder;
 import com.itacademy.softserve.entity.User;
 
-public class UserDao extends ADaoCrud<User> {
+import java.util.List;
+
+public class UserDao extends DaoCrudA<User> {
 
     @Override
     protected void init() {
@@ -13,6 +16,15 @@ public class UserDao extends ADaoCrud<User> {
 
     @Override
     protected Object[] getFields(User entity) {
-        return new Object[0];
+        Object[] fields = new Object[3];
+        fields[0] = entity.getId();
+        fields[1] = entity.getName();
+        fields[2] = entity.getPassword();
+        return fields;
+    }
+
+    public static void main(String[] args) {
+        UserDao userDao = new UserDao();
+        System.out.println(userDao.updateByField("Andy", "333", "Andy"));
     }
 }

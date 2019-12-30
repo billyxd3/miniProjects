@@ -8,27 +8,28 @@ import com.itacademy.softserve.util.CrudUtils;
 import java.sql.Connection;
 import java.util.*;
 
-public abstract class ADaoRead<TEntity> implements IDaoRead<TEntity> {
+public abstract class DaoReadA<TEntity> implements DaoReadI<TEntity> {
     protected final Map<Enum<?>, Enum<?>> sqlQueries;
 
-    protected ADaoRead() {
+    protected DaoReadA() {
         sqlQueries = new HashMap<>();
+        init();
     }
 
     protected abstract void init();
 
-    public TEntity getByID(Long id) {
+    public TEntity getByID(InstanceBuilder<TEntity> builder, Long id) {
         Connection connection = ConnectionFactory.getConnectionFactory().getConnection();
-        return CrudUtils.getEntity(connection, sqlQueries.get(SqlQueries.GET_BY_ID).toString(), new InstanceBuilder<TEntity>(), id);
+        return CrudUtils.getEntity(connection, sqlQueries.get(SqlQueries.GET_BY_ID).toString(), builder, id);
     }
 
-    public List<TEntity> getByFields(String... fields) {
+    public List<TEntity> getByFields(InstanceBuilder<TEntity> builder, Object... fields) {
         Connection connection = ConnectionFactory.getConnectionFactory().getConnection();
-        return CrudUtils.getEntityList(connection, sqlQueries.get(SqlQueries.GET_BY_FIELD).toString(), new InstanceBuilder<TEntity>(), (Object) fields);
+        return CrudUtils.getEntityList(connection, sqlQueries.get(SqlQueries.GET_BY_FIELD).toString(), builder, fields);
     }
 
-    public List<TEntity> getAll() {
+    public List<TEntity> getAll(InstanceBuilder<TEntity> builder, Long id) {
         Connection connection = ConnectionFactory.getConnectionFactory().getConnection();
-        return CrudUtils.getAll(connection, sqlQueries.get(SqlQueries.GET_BY_FIELD).toString(), new InstanceBuilder<TEntity>());
+        return CrudUtils.getEntityList(connection, sqlQueries.get(SqlQueries.GET_ALL).toString(), builder, id);
     }
 }

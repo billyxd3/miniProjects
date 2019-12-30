@@ -37,25 +37,12 @@ public class CrudUtils {
         }
     }
 
-    public static <TEntity> List<TEntity> getAll(Connection connection, String query, InstanceBuilder<TEntity> mapper) {
-        List<TEntity> all = new ArrayList<>();
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                while (resultSet.next()) {
-                    all.add(mapper.createInstance(resultSet));
-                }
-                return all;
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException();
-        }
-    }
-
     public static int update(Connection connection, String query, Object... args) {
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             setArgsToStatement(preparedStatement, args);
             return preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new RuntimeException();
         }
     }
