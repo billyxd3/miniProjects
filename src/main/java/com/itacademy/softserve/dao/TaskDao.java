@@ -1,6 +1,7 @@
 package com.itacademy.softserve.dao;
 
 import com.itacademy.softserve.dao.builder.InstanceBuilder;
+import com.itacademy.softserve.dao.builder.TaskBuilder;
 import com.itacademy.softserve.db.ConnectionFactory;
 import com.itacademy.softserve.entity.SqlQueries;
 import com.itacademy.softserve.entity.Task;
@@ -48,10 +49,6 @@ public class TaskDao extends DaoCrudA<Task> {
                 fieldsValues[0], fieldsValues[1], fieldsValues[2], fieldsValues[3]);
         int status = CrudUtils.update(connection, query, fieldsValues);
         return status > 0;
-    }
-
-    public static void main(String[] args) {
-
     }
 
 }

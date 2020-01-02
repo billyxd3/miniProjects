@@ -1,6 +1,13 @@
 package com.itacademy.softserve.dao;
 
+import com.itacademy.softserve.dao.builder.InstanceBuilder;
+import com.itacademy.softserve.db.ConnectionFactory;
+import com.itacademy.softserve.entity.SqlQueries;
 import com.itacademy.softserve.entity.User;
+import com.itacademy.softserve.util.CrudUtils;
+
+import java.sql.Connection;
+import java.util.List;
 
 public class UserDao extends DaoCrudA<User> {
 
@@ -20,8 +27,9 @@ public class UserDao extends DaoCrudA<User> {
         return fields;
     }
 
-    public static void main(String[] args) {
-        UserDao userDao = new UserDao();
-        System.out.println(userDao.updateByField("Andy", "333", "Andy"));
+    public List<User>  getAllUsers(InstanceBuilder<User> instanceBuilder) {
+        Connection connection = ConnectionFactory.getConnectionFactory().getConnection();
+        return CrudUtils.getEntityList(connection, sqlQueries.get(SqlQueries.GET_ALL).toString(), instanceBuilder);
     }
+
 }

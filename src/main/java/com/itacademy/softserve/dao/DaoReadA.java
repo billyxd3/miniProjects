@@ -18,18 +18,21 @@ public abstract class DaoReadA<TEntity> implements DaoReadI<TEntity> {
 
     protected abstract void init();
 
+    @Override
     public TEntity getByID(InstanceBuilder<TEntity> builder, Long id) {
         Connection connection = ConnectionFactory.getConnectionFactory().getConnection();
         return CrudUtils.getEntity(connection, sqlQueries.get(SqlQueries.GET_BY_ID).toString(), builder, id).get();
     }
 
+    @Override
     public List<TEntity> getByFields(InstanceBuilder<TEntity> builder, Object... fields) {
         Connection connection = ConnectionFactory.getConnectionFactory().getConnection();
         return CrudUtils.getEntityList(connection, sqlQueries.get(SqlQueries.GET_BY_FIELD).toString(), builder, fields);
     }
 
-    public List<TEntity> getAll(InstanceBuilder<TEntity> builder, Long id) {
+    @Override
+    public List<TEntity> getAll(InstanceBuilder<TEntity> builder, Object... params) {
         Connection connection = ConnectionFactory.getConnectionFactory().getConnection();
-        return CrudUtils.getEntityList(connection, sqlQueries.get(SqlQueries.GET_ALL).toString(), builder, id);
+        return CrudUtils.getEntityList(connection, sqlQueries.get(SqlQueries.GET_ALL).toString(), builder, params);
     }
 }
