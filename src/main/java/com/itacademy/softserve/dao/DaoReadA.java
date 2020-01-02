@@ -1,6 +1,6 @@
 package com.itacademy.softserve.dao;
 
-import com.itacademy.softserve.builder.InstanceBuilder;
+import com.itacademy.softserve.dao.builder.InstanceBuilder;
 import com.itacademy.softserve.db.ConnectionFactory;
 import com.itacademy.softserve.entity.SqlQueries;
 import com.itacademy.softserve.util.CrudUtils;
@@ -20,7 +20,7 @@ public abstract class DaoReadA<TEntity> implements DaoReadI<TEntity> {
 
     public TEntity getByID(InstanceBuilder<TEntity> builder, Long id) {
         Connection connection = ConnectionFactory.getConnectionFactory().getConnection();
-        return CrudUtils.getEntity(connection, sqlQueries.get(SqlQueries.GET_BY_ID).toString(), builder, id);
+        return CrudUtils.getEntity(connection, sqlQueries.get(SqlQueries.GET_BY_ID).toString(), builder, id).get();
     }
 
     public List<TEntity> getByFields(InstanceBuilder<TEntity> builder, Object... fields) {

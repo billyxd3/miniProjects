@@ -1,9 +1,6 @@
 package com.itacademy.softserve.dao;
 
-import com.itacademy.softserve.builder.UserBuilder;
 import com.itacademy.softserve.entity.User;
-
-import java.util.List;
 
 public class UserDao extends DaoCrudA<User> {
 

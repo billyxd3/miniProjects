@@ -1,4 +1,4 @@
-package com.itacademy.softserve.builder;
+package com.itacademy.softserve.dao.builder;
 
 import java.sql.ResultSet;
 

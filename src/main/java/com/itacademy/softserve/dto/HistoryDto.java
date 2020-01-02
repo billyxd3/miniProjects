@@ -4,20 +4,20 @@ import java.util.Date;
 
 public class HistoryDto {
     private Long id;
-    private TaskDto task;
+    private String task;
     private Date modifiedDate;
     private String status;
 
     public HistoryDto() {
     }
 
-    public HistoryDto(TaskDto task, Date modifiedDate, String status) {
+    public HistoryDto(String task, Date modifiedDate, String status) {
         this.task = task;
         this.modifiedDate = modifiedDate;
         this.status = status;
     }
 
-    public HistoryDto(Long id, TaskDto task, Date modifiedDate, String status) {
+    public HistoryDto(Long id, String task, Date modifiedDate, String status) {
         this.id = id;
         this.task = task;
         this.modifiedDate = modifiedDate;
@@ -32,11 +32,11 @@ public class HistoryDto {
         this.id = id;
     }
 
-    public TaskDto getTask() {
+    public String getTask() {
         return task;
     }
 
-    public void setTask(TaskDto task) {
+    public void setTask(String task) {
         this.task = task;
     }
 

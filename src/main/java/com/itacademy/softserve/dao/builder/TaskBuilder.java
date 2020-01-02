@@ -1,6 +1,5 @@
-package com.itacademy.softserve.builder;
+package com.itacademy.softserve.dao.builder;
 
-import com.itacademy.softserve.entity.SqlQueries;
 import com.itacademy.softserve.entity.Task;
 
 import java.sql.ResultSet;
@@ -12,8 +11,8 @@ public class TaskBuilder implements InstanceBuilder<Task> {
         Task task = new Task();
         try {
             task.setId(resultSet.getLong("TaskID"));
-            task.setAssigneeID(resultSet.getInt("Assignee"));
-            task.setOwnerID(resultSet.getInt("Owner"));
+            task.setAssigneeID(resultSet.getLong("Assignee"));
+            task.setOwnerID(resultSet.getLong("Owner"));
             task.setDescription(resultSet.getString("Description"));
             task.setCreationDate(resultSet.getDate("CreationDate"));
             task.setDeadline(resultSet.getDate("Deadline"));

@@ -1,11 +1,6 @@
 package com.itacademy.softserve.dao;
 
-import com.itacademy.softserve.builder.HistoryBuilder;
 import com.itacademy.softserve.entity.History;
-
-import java.sql.Date;
-import java.time.LocalDate;
-import java.util.List;
 
 public class HistoryDao extends DaoCrudA<History> {
 

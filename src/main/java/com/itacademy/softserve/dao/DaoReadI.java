@@ -1,6 +1,6 @@
 package com.itacademy.softserve.dao;
 
-import com.itacademy.softserve.builder.InstanceBuilder;
+import com.itacademy.softserve.dao.builder.InstanceBuilder;
 
 import java.util.List;
 

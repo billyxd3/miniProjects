@@ -1,7 +1,6 @@
 package com.itacademy.softserve.dao;
 
-import com.itacademy.softserve.builder.InstanceBuilder;
-import com.itacademy.softserve.builder.TaskBuilder;
+import com.itacademy.softserve.dao.builder.InstanceBuilder;
 import com.itacademy.softserve.db.ConnectionFactory;
 import com.itacademy.softserve.entity.SqlQueries;
 import com.itacademy.softserve.entity.Task;
@@ -34,15 +33,25 @@ public class TaskDao extends DaoCrudA<Task> {
 
     public List<Task> getByRegex(InstanceBuilder<Task> builder, String regex) {
         Connection connection = ConnectionFactory.getConnectionFactory().getConnection();
-        return CrudUtils.getEntityList(connection, sqlQueries.get(SqlQueries.GET_BY_REGEX).toString(), builder, regex);
+        StringBuilder query = new StringBuilder(sqlQueries.get(SqlQueries.GET_BY_REGEX).toString())
+                .append("'%")
+                .append(regex)
+                .append("%';");
+
+        return CrudUtils.getEntityList(connection, query.toString(), builder, regex);
+    }
+
+    @Override
+    public boolean updateByField(Object... fieldsValues) {
+        Connection connection = ConnectionFactory.getConnectionFactory().getConnection();
+        String query = String.format(sqlQueries.get(SqlQueries.UPDATE_BY_FIELD).toString(),
+                fieldsValues[0], fieldsValues[1], fieldsValues[2], fieldsValues[3]);
+        int status = CrudUtils.update(connection, query, fieldsValues);
+        return status > 0;
     }
 
     public static void main(String[] args) {
-        TaskDao taskDao = new TaskDao();
-        Task task = taskDao.getByID(new TaskBuilder(),3L);
-        List<Task> list = taskDao.getByRegex(new TaskBuilder(), "write dao");
-       // System.out.println();
-        list.forEach(System.out::println);
+
     }
 
 }

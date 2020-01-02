@@ -10,11 +10,11 @@ public class Task extends Entity {
         GET_BY_FIELD(SqlQueries.GET_BY_FIELD, "SELECT TaskID, Assignee, Owner, Description," +
                 " CreationDate, Deadline, StatusID FROM tasks WHERE StatusID = ?;"),
         GET_BY_REGEX(SqlQueries.GET_BY_REGEX, "SELECT TaskID, Assignee, Owner, Description," +
-                " CreationDate, Deadline, StatusID FROM tasks WHERE Description LIKE '%?%';"),
+                " CreationDate, Deadline, StatusID FROM tasks WHERE Description LIKE "),
         INSERT(SqlQueries.INSERT, "INSERT INTO tasks (Assignee, Owner, Description, CreationDate, Deadline, StatusID) " +
                 "VALUES (?, ?, ?, ?, ?, ?);"),
         UPDATE_BY_ID(SqlQueries.UPDATE_BY_ID, "UPDATE tasks SET StatusID = ? WHERE TaskID = ?;"),
-        UPDATE_BY_FIELD(SqlQueries.UPDATE_BY_FIELD, "UPDATE tasks SET ? = ? WHERE ? = ?;");
+        UPDATE_BY_FIELD(SqlQueries.UPDATE_BY_FIELD, "UPDATE tasks SET %s = %s WHERE %s = %s;");
 
         private SqlQueries sqlQueries;
         private String query;
@@ -34,8 +34,8 @@ public class Task extends Entity {
         }
     }
 
-    private Integer assigneeID;
-    private Integer ownerID;
+    private Long assigneeID;
+    private Long ownerID;
     private String description;
     private Date creationDate;
     private Date deadline;
@@ -44,7 +44,7 @@ public class Task extends Entity {
     public Task() {
     }
 
-    public Task(Integer assigneeID, Integer ownerID, String description,
+    public Task(Long assigneeID, Long ownerID, String description,
                 Date creationDate, Date deadline, Integer statusID) {
         this.assigneeID = assigneeID;
         this.ownerID = ownerID;
@@ -54,7 +54,7 @@ public class Task extends Entity {
         this.statusID = statusID;
     }
 
-    public Task(Long id, Integer assigneeID, Integer ownerID, String description,
+    public Task(Long id, Long assigneeID, Long ownerID, String description,
                 Date creationDate, Date deadline, Integer statusID) {
         super(id);
         this.assigneeID = assigneeID;
@@ -65,19 +65,19 @@ public class Task extends Entity {
         this.statusID = statusID;
     }
 
-    public Integer getAssigneeID() {
+    public Long getAssigneeID() {
         return assigneeID;
     }
 
-    public void setAssigneeID(Integer assigneeID) {
+    public void setAssigneeID(Long assigneeID) {
         this.assigneeID = assigneeID;
     }
 
-    public Integer getOwnerID() {
+    public Long getOwnerID() {
         return ownerID;
     }
 
-    public void setOwnerID(Integer ownerID) {
+    public void setOwnerID(Long ownerID) {
         this.ownerID = ownerID;
     }
 

@@ -6,32 +6,32 @@ public class TaskDto {
     private Long taskID;
     private String assignee;
     private String owner;
-    private String taskDescription;
+    private String Description;
     private Date creationDate;
     private Date deadline;
-    private Integer statusID;
+    private String status;
 
     public TaskDto() {
     }
 
-    public TaskDto(String assignee, String owner, String taskDescription, Date creationDate, Date deadline, Integer statusID) {
+    public TaskDto(String assignee, String owner, String Description, Date creationDate, Date deadline, String status) {
         this.assignee = assignee;
         this.owner = owner;
-        this.taskDescription = taskDescription;
+        this.Description = Description;
         this.creationDate = creationDate;
         this.deadline = deadline;
-        this.statusID = statusID;
+        this.status = status;
     }
 
-    public TaskDto(Long taskID, String assignee, String owner, String taskDescription,
-                   Date creationDate, Date deadline, Integer statusID) {
+    public TaskDto(Long taskID, String assignee, String owner, String Description,
+                   Date creationDate, Date deadline, String status) {
         this.taskID = taskID;
         this.assignee = assignee;
         this.owner = owner;
-        this.taskDescription = taskDescription;
+        this.Description = Description;
         this.creationDate = creationDate;
         this.deadline = deadline;
-        this.statusID = statusID;
+        this.status = status;
     }
 
     public Long getTaskID() {
@@ -58,12 +58,12 @@ public class TaskDto {
         this.owner = owner;
     }
 
-    public String getTaskDescription() {
-        return taskDescription;
+    public String getDescription() {
+        return Description;
     }
 
-    public void setTaskDescription(String taskDescription) {
-        this.taskDescription = taskDescription;
+    public void setDescription(String description) {
+        this.Description = description;
     }
 
     public Date getCreationDate() {
@@ -82,11 +82,12 @@ public class TaskDto {
         this.deadline = deadline;
     }
 
-    public Integer getStatusID() {
-        return statusID;
+    public String getStatus() {
+        return status;
     }
 
-    public void setStatusID(Integer statusID) {
-        this.statusID = statusID;
+    public void setStatus(String status) {
+        this.status = status;
     }
+
 }

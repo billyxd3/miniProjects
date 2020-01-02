@@ -1,21 +1,22 @@
 package com.itacademy.softserve.util;
 
-import com.itacademy.softserve.builder.InstanceBuilder;
+import com.itacademy.softserve.dao.builder.InstanceBuilder;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class CrudUtils {
 
-    public static <TEntity> TEntity getEntity(Connection connection, String query, InstanceBuilder<TEntity> mapper, Object... args) {
+    public static <TEntity> Optional<TEntity> getEntity(Connection connection, String query, InstanceBuilder<TEntity> mapper, Object... args) {
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             setArgsToStatement(preparedStatement, args);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
-                    return mapper.createInstance(resultSet);
+                    return Optional.of(mapper.createInstance(resultSet));
                 }
-                return null;
+                return Optional.empty();
             }
         } catch (SQLException e) {
             throw new RuntimeException();
