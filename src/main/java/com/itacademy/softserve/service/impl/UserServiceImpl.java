@@ -1,8 +1,11 @@
 package com.itacademy.softserve.service.impl;
 
 import com.itacademy.softserve.dao.UserDao;
+import com.itacademy.softserve.dao.builder.UserBuilder;
 import com.itacademy.softserve.dto.UserDto;
 import com.itacademy.softserve.entity.User;
+import com.itacademy.softserve.exception.NotFoundException;
+import com.itacademy.softserve.exception.NotSaveException;
 import com.itacademy.softserve.service.UserService;
 
 import java.util.List;
@@ -20,8 +23,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public boolean login(UserDto userDto) {
+        User user = userDao.getByFields(new UserBuilder(), userDto.getName()).get(0);
+        if(user != null) {
+            return user.getName().equals(userDto.getName())
+                    && user.getPassword().equals(userDto.getPassword());
+        } else {
+            throw new NotFoundException("Don`t save");
+        }
+    }
+
+    @Override
     public boolean save(UserDto userDto) {
-        return false;
+        if(userDao.getByFields(new UserBuilder(), userDto.getName()).isEmpty()) {
+            return userDao.insert(new User(userDto.getName(), userDto.getPassword()));
+        } else {
+            throw new NotSaveException("Don`t save");
+        }
     }
 
     @Override
