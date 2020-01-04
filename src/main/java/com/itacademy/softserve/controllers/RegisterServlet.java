@@ -20,6 +20,7 @@ public class RegisterServlet extends HttpServlet {
 
     @Override
     public void init(ServletConfig config) throws ServletException {
+        super.init(config);
         userService = new UserServiceImpl();
     }
 
@@ -37,10 +38,10 @@ public class RegisterServlet extends HttpServlet {
             userService.save(userDto);
             response.sendRedirect(request.getContextPath() + ServletUrl.HOME_URL);
         } catch (RuntimeException e) {
-            request.setAttribute("error", "Bad credentials");
+            request.setAttribute("error", "Such user already exist");
             getServletConfig()
                     .getServletContext()
-                    .getRequestDispatcher(JspUrl.MAIN_JSP)
+                    .getRequestDispatcher(JspUrl.REGISTER_JSP)
                     .forward(request, response);
         }
     }

@@ -14,7 +14,11 @@
 
 <br><br>
 <h1>Registration</h1>
-
+<c:if test="${error ne null}">
+    <p>
+        <font color="red">${error}</font>
+    </p>
+</c:if>
 <form action="${pageContext.request.contextPath}/register" method="post">
     User name: <input type="text" name="name">
     <br><br>

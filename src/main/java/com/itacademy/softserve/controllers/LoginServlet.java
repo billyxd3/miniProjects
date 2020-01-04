@@ -20,6 +20,7 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     public void init(ServletConfig config) throws ServletException {
+        super.init(config);
         userService = new UserServiceImpl();
     }
 
@@ -35,12 +36,12 @@ public class LoginServlet extends HttpServlet {
         UserDto userDto = new UserDto(request.getParameter("name"), request.getParameter("password"));
         try {
             userService.login(userDto);
-            response.sendRedirect(request.getContextPath() + JspUrl.HOME_JSP);//redirect to home page
+            response.sendRedirect(request.getContextPath() + ServletUrl.HOME_URL);
         } catch (RuntimeException e) {
-            request.setAttribute("error", "Bad credentials");
+            request.setAttribute("error", "Bad Login or Password");
             getServletConfig()
                     .getServletContext()
-                    .getRequestDispatcher(JspUrl.LOGIN_JSP)
+                    .getRequestDispatcher("/WEB-INF/views/login.jsp")
                     .forward(request, response);
         }
     }
