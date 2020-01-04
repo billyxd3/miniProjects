@@ -1,6 +1,5 @@
 package com.itacademy.softserve.db;
 
-import com.itacademy.softserve.entity.SqlQueries;
 
 import java.sql.*;
 import java.util.HashMap;
@@ -21,7 +20,9 @@ public class ConnectionFactory {
     public static ConnectionFactory getConnectionFactory() {
         if (connectionFactory == null) {
             synchronized (ConnectionFactory.class) {
-                connectionFactory = new ConnectionFactory();
+                if(connectionFactory == null) {
+                    connectionFactory = new ConnectionFactory();
+                }
             }
         }
         return connectionFactory;
@@ -39,8 +40,9 @@ public class ConnectionFactory {
         Connection connection = connections.get(Thread.currentThread().getId());
         if (connection == null) {
             try {
+                Class.forName("com.mysql.jdbc.Driver");
                 connection = DriverManager.getConnection(URL, USER_NAME, PASSWORD);
-            } catch (SQLException e) {
+            } catch (SQLException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
             addConnection(connection);

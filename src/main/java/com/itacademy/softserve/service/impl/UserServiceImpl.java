@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
             return user.getName().equals(userDto.getName())
                     && user.getPassword().equals(userDto.getPassword());
         } else {
-            throw new NotFoundException("Don`t save");
+            throw new NotFoundException("Don`t login");
         }
     }
 
@@ -40,6 +40,11 @@ public class UserServiceImpl implements UserService {
         } else {
             throw new NotSaveException("Don`t save");
         }
+    }
+
+    public static void main(String[] args) {
+        UserDto userDto = new UserDto("rr", "gfg");
+        new UserServiceImpl().save(userDto);
     }
 
     @Override

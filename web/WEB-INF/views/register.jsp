@@ -15,12 +15,12 @@
 <br><br>
 <h1>Registration</h1>
 
-<form action="${pageContext.request.contextPath}/login" method="post">
+<form action="${pageContext.request.contextPath}/register" method="post">
     User name: <input type="text" name="name">
     <br><br>
     Password: <input type="password" name="password">
     <br><br>
-    <input type="submit" name="submit" value="Sign in"> <br>
+    <input type="submit" name="submit" value="Register"> <br>
 </form>
 
 </body>
