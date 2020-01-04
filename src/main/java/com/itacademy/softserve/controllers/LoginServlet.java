@@ -1,5 +1,7 @@
 package com.itacademy.softserve.controllers;
 
+import com.itacademy.softserve.constant.JspUrl;
+import com.itacademy.softserve.constant.ServletUrl;
 import com.itacademy.softserve.dto.UserDto;
 import com.itacademy.softserve.service.UserService;
 import com.itacademy.softserve.service.impl.UserServiceImpl;
@@ -12,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/login")
+@WebServlet(ServletUrl.LOGIN_URL)
 public class LoginServlet extends HttpServlet {
     private UserService userService;
 
@@ -24,7 +26,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        req.getRequestDispatcher("login.jsp").include(req, resp);
+        req.getRequestDispatcher(JspUrl.LOGIN_JSP).include(req, resp);
     }
 
     @Override
@@ -33,12 +35,12 @@ public class LoginServlet extends HttpServlet {
         UserDto userDto = new UserDto(request.getParameter("name"), request.getParameter("password"));
         try {
             userService.login(userDto);
-            response.sendRedirect(request.getContextPath() + "");//redirect to home page
+            response.sendRedirect(request.getContextPath() + JspUrl.HOME_JSP);//redirect to home page
         } catch (RuntimeException e) {
             request.setAttribute("error", "Bad credentials");
             getServletConfig()
                     .getServletContext()
-                    .getRequestDispatcher("login.jsp")
+                    .getRequestDispatcher(JspUrl.LOGIN_JSP)
                     .forward(request, response);
         }
     }
