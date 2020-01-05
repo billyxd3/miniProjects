@@ -8,6 +8,8 @@ import com.itacademy.softserve.entity.Task;
 import com.itacademy.softserve.util.CrudUtils;
 
 import java.sql.Connection;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public class TaskDao extends DaoCrudA<Task> {
@@ -50,5 +52,4 @@ public class TaskDao extends DaoCrudA<Task> {
         int status = CrudUtils.update(connection, query, fieldsValues);
         return status > 0;
     }
-
 }

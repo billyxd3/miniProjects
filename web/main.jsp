@@ -9,12 +9,29 @@
 <html>
 <head>
     <title>Main</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+    <link rel="stylesheet" type="text/css" href="css/util.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 <body>
-<h1>To Do List</h1>
-<form action="${pageContext.request.contextPath}/main" method="post">
-    <input type="submit" name="submitLogin" value="Sign in"> <br>
-    <input type="submit" name="submitRegistration" value="Sign up"> <br>
-</form>
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <div class="login100-form-title" style="background-image: url(/WEB-INF/views/images/bg-01.jpg);">
+					<span class="login100-form-title-1">
+						To Do List
+					</span>
+            </div>
+
+            <form class="login100-form validate-form action="
+            ${pageContext.request.contextPath}/main" method="post">
+            <input class="inputS" type="submit" name="submitLogin" value="Sign in"> <br>
+            <input class="inputS" type="submit" name="submitRegistration" value="Sign up"> <br>
+            </form>
+
+        </div>
+    </div>
+</div>
 </body>
 </html>

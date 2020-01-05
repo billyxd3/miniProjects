@@ -6,7 +6,7 @@ public class TaskDto {
     private Long taskID;
     private String assignee;
     private String owner;
-    private String Description;
+    private String description;
     private Date creationDate;
     private Date deadline;
     private String status;
@@ -17,7 +17,7 @@ public class TaskDto {
     public TaskDto(String assignee, String owner, String Description, Date creationDate, Date deadline, String status) {
         this.assignee = assignee;
         this.owner = owner;
-        this.Description = Description;
+        this.description = Description;
         this.creationDate = creationDate;
         this.deadline = deadline;
         this.status = status;
@@ -28,7 +28,7 @@ public class TaskDto {
         this.taskID = taskID;
         this.assignee = assignee;
         this.owner = owner;
-        this.Description = Description;
+        this.description = Description;
         this.creationDate = creationDate;
         this.deadline = deadline;
         this.status = status;
@@ -59,11 +59,11 @@ public class TaskDto {
     }
 
     public String getDescription() {
-        return Description;
+        return description;
     }
 
     public void setDescription(String description) {
-        this.Description = description;
+        this.description = description;
     }
 
     public Date getCreationDate() {

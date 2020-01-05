@@ -5,6 +5,7 @@ import com.itacademy.softserve.constant.ServletUrl;
 import com.itacademy.softserve.dto.UserDto;
 import com.itacademy.softserve.service.UserService;
 import com.itacademy.softserve.service.impl.UserServiceImpl;
+import com.itacademy.softserve.util.SessionManager;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -36,6 +37,7 @@ public class RegisterServlet extends HttpServlet {
         UserDto userDto = new UserDto(request.getParameter("name"), request.getParameter("password"));
         try {
             userService.save(userDto);
+            new SessionManager().createSession(userDto, request, response);
             response.sendRedirect(request.getContextPath() + ServletUrl.HOME_URL);
         } catch (RuntimeException e) {
             request.setAttribute("error", "Such user already exist");

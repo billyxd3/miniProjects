@@ -14,12 +14,13 @@ public class TaskDtoMapper implements DtoMapper<TaskDto> {
         Task task = (Task) entity;
         TaskDto taskDto = new TaskDto();
         UserDao userDao = new UserDao();
+        taskDto.setTaskID(task.getId());
         taskDto.setAssignee(userDao.getByID(new UserBuilder(),task.getAssigneeID()).getName());
         taskDto.setOwner(userDao.getByID(new UserBuilder(), task.getOwnerID()).getName());
         taskDto.setDescription(task.getDescription());
         taskDto.setCreationDate(task.getCreationDate());
         taskDto.setDeadline(task.getDeadline());
         taskDto.setStatus(new StatusDao().getByID(new StatusBuilder(), Long.valueOf(task.getStatusID())).getName());
-        return null;
+        return taskDto;
     }
 }
