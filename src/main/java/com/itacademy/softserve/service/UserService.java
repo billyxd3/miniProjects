@@ -12,5 +12,5 @@ public interface UserService {
     boolean update(User user);
     Optional<User> getById(Long id);
     Optional<User> getByName(String name);
-    List<User> getAll();
+    List<UserDto> getAll();
 }

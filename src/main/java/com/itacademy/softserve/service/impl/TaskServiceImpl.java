@@ -1,7 +1,9 @@
 package com.itacademy.softserve.service.impl;
 
+import com.itacademy.softserve.dao.StatusDao;
 import com.itacademy.softserve.dao.TaskDao;
 import com.itacademy.softserve.dao.UserDao;
+import com.itacademy.softserve.dao.builder.StatusBuilder;
 import com.itacademy.softserve.dao.builder.TaskBuilder;
 import com.itacademy.softserve.dao.builder.UserBuilder;
 import com.itacademy.softserve.dto.TaskDto;
@@ -26,9 +28,9 @@ public class TaskServiceImpl implements TaskService {
     public List<TaskDto> getPageSet(UserDto userDto, int begin) {
         int end = begin + RECORDS_PER_PAGE;
         Long userId = new UserDao().getByFields(new UserBuilder(), userDto.getName()).get(0).getId();
-        if(tasks == null) {
+     //   if(tasks == null) {
             tasks = taskDao.getAll(new TaskBuilder(), userId, userId, 3);
-        }
+      //  }
         List<TaskDto> taskGroup = new ArrayList<>();
         if(end > tasks.size()) {
             end = tasks.size();
@@ -42,6 +44,22 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public boolean changeStatus(Long taskId) {
         return false;
+    }
+
+    @Override
+    public boolean save(TaskDto taskDto) {
+        UserDao userDao = new UserDao();
+        Task task = new Task();
+        task.setAssigneeID(userDao.getByFields(new UserBuilder(),taskDto.getAssignee()).get(0).getId());
+        task.setOwnerID(userDao.getByFields(new UserBuilder(), taskDto.getOwner()).get(0).getId());
+        task.setDescription(taskDto.getDescription());
+        task.setCreationDate(taskDto.getCreationDate());
+        task.setDeadline(taskDto.getDeadline());
+        task.setStatusID(new StatusDao().getByFields(new StatusBuilder(), taskDto.getStatus()).get(0).getId().intValue());
+        if(taskDao.insert(task)) {
+            new HistoryServiceImpl().addRecord(task);
+        }
+        return true;
     }
 
     @Override

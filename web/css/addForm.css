@@ -1,0 +1,219 @@
+
+.font-robo {
+    font-family: "Roboto", "Arial", "Helvetica Neue", sans-serif;
+}
+
+html {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+*, *:before, *:after {
+    -webkit-box-sizing: inherit;
+    -moz-box-sizing: inherit;
+    box-sizing: inherit;
+}
+
+/* ==========================================================================
+   #RESET
+   ========================================================================== */
+body,
+h1, h2, h3, h4, h5, h6,
+blockquote, p, pre,
+dl, dd, ol, ul,
+figure,
+hr,
+fieldset, legend {
+    margin: 0;
+    padding: 0;
+}
+
+/**
+ * Remove trailing margins from nested lists.
+ */
+li > ol,
+li > ul {
+    margin-bottom: 0;
+}
+
+/**
+ * Remove default table spacing.
+ */
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/**
+ * 1. Reset Chrome and Firefox behaviour which sets a `min-width: min-content;`
+ *    on fieldsets.
+ */
+fieldset {
+    min-width: 0;
+    /* [1] */
+    border: 0;
+}
+
+button {
+    outline: none;
+    background: none;
+    border: none;
+}
+
+/* ==========================================================================
+   #PAGE WRAPPER
+   ========================================================================== */
+.page-wrapper {
+    min-height: 100vh;
+}
+
+body {
+    font-family: "Roboto", "Arial", "Helvetica Neue", sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 400;
+}
+
+h1 {
+    font-size: 36px;
+}
+
+h2 {
+    font-size: 30px;
+}
+
+h3 {
+    font-size: 24px;
+}
+
+h4 {
+    font-size: 18px;
+}
+
+h5 {
+    font-size: 15px;
+}
+
+h6 {
+    font-size: 13px;
+}
+
+/* ==========================================================================
+   #BACKGROUND
+   ========================================================================== */
+.bg-blue {
+    background: #57b846;
+}
+
+.bg-red {
+    background: #00FA9A;
+}
+
+/* ==========================================================================
+   #WRAPPER
+   ========================================================================== */
+.wrapper {
+    margin: 0 auto;
+}
+
+.wrapper--w960 {
+    max-width: 960px;
+    padding-top: 100px;
+}
+
+/* ==========================================================================
+   #BUTTON
+   ========================================================================== */
+.btn {
+    border-radius: 25px;
+    line-height: 40px;
+    display: inline-block;
+    padding: 0 25px;
+    cursor: pointer;
+    color: #fff;
+    font-family: "Roboto", "Arial", "Helvetica Neue", sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.btn--green {
+    background: #800080;
+}
+
+.btn--green:hover {
+    background: #4B0082;
+}
+
+
+/* ==========================================================================
+   #FORM
+   ========================================================================== */
+input {
+    outline: none;
+    margin: 0;
+    border-radius: 10px;
+    border: 1px solid blueviolet;
+    box-shadow: none;
+    background: honeydew;
+    width: 100%;
+    font-size: 14px;
+    font-family: inherit;
+}
+
+select {
+  outline: none;
+  margin: 0;
+  border-radius: 10px;
+  border: 1px solid blueviolet;
+  box-shadow: none;
+  background: honeydew;
+  width: 31%;
+  height: 43px;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+/* input group 1 */
+/* end input group 1 */
+.input-group {
+    position: relative;
+    margin-bottom: 32px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.input--style-2 {
+    padding: 9px 0;
+    color: #666;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.input--style-2::-webkit-input-placeholder {
+    color: #808080;
+}
+
+.input--style-2:-moz-placeholder {
+    color: #808080;
+    opacity: 1;
+}
+
+.input--style-2::-moz-placeholder {
+    color: #808080;
+    opacity: 1;
+}
+
+.title {
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 37px;
+}
+

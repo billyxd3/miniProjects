@@ -7,6 +7,8 @@ public class Task extends Entity {
     public static enum TaskEntityQueries {
         GET_BY_ID(SqlQueries.GET_BY_ID, "SELECT TaskID, Assignee, Owner, Description, CreationDate," +
                 " Deadline, StatusID FROM tasks WHERE TaskID = ?;"),
+        GET_BY_FIELD(SqlQueries.GET_BY_FIELD, "SELECT * FROM tasks WHERE Assignee = ? AND Owner = ? AND Description = ?" +
+                " AND CreationDate = ? AND StatusID = ?;"),
         GET_ALL(SqlQueries.GET_ALL, "SELECT TaskID, Assignee, Owner, Description, CreationDate," +
                                 " Deadline, StatusID FROM tasks WHERE (Assignee = ? OR Owner = ?) AND NOT StatusID = ?;"),
         GET_BY_REGEX(SqlQueries.GET_BY_REGEX, "SELECT TaskID, Assignee, Owner, Description," +

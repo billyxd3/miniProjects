@@ -3,11 +3,14 @@ package com.itacademy.softserve.service.impl;
 import com.itacademy.softserve.dao.UserDao;
 import com.itacademy.softserve.dao.builder.UserBuilder;
 import com.itacademy.softserve.dto.UserDto;
+import com.itacademy.softserve.dto.mapper.UserDtoMapper;
 import com.itacademy.softserve.entity.User;
 import com.itacademy.softserve.exception.NotFoundException;
 import com.itacademy.softserve.exception.NotSaveException;
 import com.itacademy.softserve.service.UserService;
 
+import java.awt.image.AreaAveragingScaleFilter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,11 +45,6 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    public static void main(String[] args) {
-        UserDto userDto = new UserDto("rr", "gfg");
-        new UserServiceImpl().save(userDto);
-    }
-
     @Override
     public boolean update(User user) {
         return false;
@@ -63,7 +61,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getAll() {
-        return null;
+    public List<UserDto> getAll() {
+        List<UserDto> users = new ArrayList<>();
+        UserDtoMapper userDtoMapper = new UserDtoMapper();
+        userDao.getAll(new UserBuilder()).forEach(user->users.add(userDtoMapper.mapToDto(user)));
+        return users;
     }
 }

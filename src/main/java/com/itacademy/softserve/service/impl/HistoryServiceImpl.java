@@ -1,16 +1,20 @@
 package com.itacademy.softserve.service.impl;
 
 import com.itacademy.softserve.dao.HistoryDao;
+import com.itacademy.softserve.dao.TaskDao;
 import com.itacademy.softserve.dao.UserDao;
 import com.itacademy.softserve.dao.builder.HistoryBuilder;
+import com.itacademy.softserve.dao.builder.TaskBuilder;
 import com.itacademy.softserve.dao.builder.UserBuilder;
 import com.itacademy.softserve.dto.HistoryDto;
 import com.itacademy.softserve.dto.UserDto;
 import com.itacademy.softserve.dto.mapper.HistoryDtoMapper;
 import com.itacademy.softserve.entity.History;
+import com.itacademy.softserve.entity.Task;
 import com.itacademy.softserve.service.HistoryService;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class HistoryServiceImpl implements HistoryService {
@@ -26,9 +30,9 @@ public class HistoryServiceImpl implements HistoryService {
     public List<HistoryDto> getHistorySet(UserDto userDto, int begin) {
         int end = begin + RECORDS_PER_PAGE;
         Long userId = new UserDao().getByFields(new UserBuilder(), userDto.getName()).get(0).getId();
-        if(historyList == null) {
+  //      if(historyList == null) {
             historyList = historyDao.getAll(new HistoryBuilder(), userId);
-        }
+   //     }
         List<HistoryDto> historyGroup = new ArrayList<>();
         if(end > historyList.size()) {
             end = historyList.size();
@@ -39,17 +43,10 @@ public class HistoryServiceImpl implements HistoryService {
         return historyGroup;
     }
 
-    public static void main(String[] args) {
-        int count = 0;
-        List<History> his = new HistoryDao().getAll(new HistoryBuilder(), 1);
-     //   his.forEach(h -> System.out.println(new HistoryDtoMapper().mapToDto(h)));
-        HistoryDto historyDto = new HistoryDtoMapper().mapToDto(his.get(50));
-        System.out.println(historyDto);
-    }
 
     @Override
-    public boolean delete() {
-        return false;
+    public boolean delete(Long userId) {
+        return new HistoryDao().deleteByField(userId);
     }
 
     @Override
@@ -58,5 +55,15 @@ public class HistoryServiceImpl implements HistoryService {
             return 0;
         }
         return (int)Math.ceil(historyList.size() * 1.0 / RECORDS_PER_PAGE);
+    }
+
+    public boolean addRecord(Task task) {
+        History historyRecord = new History();
+        historyRecord.setTaskID(new TaskDao().getByFields(new TaskBuilder(), task.getAssigneeID(), task.getOwnerID(),
+                task.getDescription(), task.getCreationDate(), task.getStatusID()).get(0).getId());
+        historyRecord.setModifiedDate(task.getCreationDate());
+        historyRecord.setStatusID(task.getStatusID());
+        historyRecord.setUserID(task.getAssigneeID());
+        return new HistoryDao().insert(historyRecord);
     }
 }

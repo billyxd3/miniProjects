@@ -1,5 +1,9 @@
 package com.itacademy.softserve.entity;
 
+import com.itacademy.softserve.constant.Statuses;
+import com.itacademy.softserve.dao.StatusDao;
+import com.itacademy.softserve.dao.UserDao;
+
 public class Status extends Entity {
     public static enum StatusEntityQueries {
         GET_BY_ID(SqlQueries.GET_BY_ID, "SELECT StatusID, Name FROM statuses Where StatusID = ?;"),
