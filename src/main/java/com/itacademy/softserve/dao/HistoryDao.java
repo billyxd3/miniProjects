@@ -2,6 +2,9 @@ package com.itacademy.softserve.dao;
 
 import com.itacademy.softserve.entity.History;
 
+import java.sql.Date;
+import java.time.LocalDate;
+
 public class HistoryDao extends DaoCrudA<History> {
 
     @Override

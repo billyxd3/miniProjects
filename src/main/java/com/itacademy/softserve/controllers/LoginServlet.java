@@ -38,7 +38,7 @@ public class LoginServlet extends HttpServlet {
         UserDto userDto = new UserDto(request.getParameter("name"), request.getParameter("password"));
         try {
             userService.login(userDto);
-            new SessionManager().createSession(userDto, request, response);
+            SessionManager.createSession(userDto, request, response);
             response.sendRedirect(request.getContextPath() + ServletUrl.HOME_URL);
         } catch (RuntimeException e) {
             request.setAttribute("error", "Bad Login or Password");

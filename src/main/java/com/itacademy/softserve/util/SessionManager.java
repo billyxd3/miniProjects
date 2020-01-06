@@ -8,14 +8,27 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class SessionManager {
-    public void createSession(UserDto userDto, HttpServletRequest request, HttpServletResponse response) {
+    private static SessionManager sessionManager;
+
+    private SessionManager() {
+        sessionManager = new SessionManager();
+    }
+
+    public static SessionManager getManager() {
+        if(sessionManager == null) {
+            sessionManager = new SessionManager();
+        }
+        return sessionManager;
+    }
+
+    public static void createSession(UserDto userDto, HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession(true);
         session.setAttribute("userDto", userDto);
         Cookie cookie = new Cookie("id_session", session.getId());
         response.addCookie(cookie);
     }
 
-    public boolean isActiveSession(HttpServletRequest request) {
+    public static boolean isActiveSession(HttpServletRequest request) {
         boolean isActive = true;
         HttpSession session = request.getSession(false);
         Cookie idSessionCookie = null;
@@ -37,10 +50,21 @@ public class SessionManager {
         return isActive;
     }
 
-    public void destroySession(HttpServletRequest request) {
+    public static void destroySession(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession(false);
-        if(session != null){
+        if(session != null) {
+            session.removeAttribute("userDto");
             session.invalidate();
         }
+        Cookie cookie;
+        for(Cookie cook : request.getCookies()) {
+            if(cook.getName().equals("id_session")) {
+                cookie = cook;
+                cookie.setMaxAge(0);
+                response.addCookie(cookie);
+                break;
+            }
+        }
+
     }
 }
