@@ -57,6 +57,11 @@ public class HistoryServiceImpl implements HistoryService {
         return (int)Math.ceil(historyList.size() * 1.0 / RECORDS_PER_PAGE);
     }
 
+    @Override
+    public boolean deleteRecord(Long id) {
+        return historyDao.deleteByID(id);
+    }
+
     public boolean addRecord(Task task) {
         History historyRecord = new History();
         historyRecord.setTaskID(new TaskDao().getByFields(new TaskBuilder(), task.getAssigneeID(), task.getOwnerID(),

@@ -24,8 +24,7 @@
 					</span>
             </div>
 
-            <form class="login100-form validate-form action="
-            ${pageContext.request.contextPath}/main" method="post">
+            <form class="login100-form validate-form action=" action="${pageContext.request.contextPath}/main" method="post">
             <input class="inputS" type="submit" name="submitLogin" value="Sign in"> <br>
             <input class="inputS" type="submit" name="submitRegistration" value="Sign up"> <br>
             </form>

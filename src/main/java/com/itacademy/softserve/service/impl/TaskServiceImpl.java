@@ -1,5 +1,6 @@
 package com.itacademy.softserve.service.impl;
 
+import com.itacademy.softserve.constant.Statuses;
 import com.itacademy.softserve.dao.StatusDao;
 import com.itacademy.softserve.dao.TaskDao;
 import com.itacademy.softserve.dao.UserDao;
@@ -29,7 +30,8 @@ public class TaskServiceImpl implements TaskService {
         int end = begin + RECORDS_PER_PAGE;
         Long userId = new UserDao().getByFields(new UserBuilder(), userDto.getName()).get(0).getId();
      //   if(tasks == null) {
-            tasks = taskDao.getAll(new TaskBuilder(), userId, userId, 3);
+            tasks = taskDao.getAll(new TaskBuilder(), userId, userId,
+                    new StatusDao().getByFields(new StatusBuilder(), Statuses.DELETE).get(0).getId());
       //  }
         List<TaskDto> taskGroup = new ArrayList<>();
         if(end > tasks.size()) {
@@ -42,8 +44,10 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public boolean changeStatus(Long taskId) {
-        return false;
+    public void changeStatus(List<TaskDto> tasks) {
+        for(TaskDto taskDto : tasks) {
+
+        }
     }
 
     @Override
@@ -68,5 +72,15 @@ public class TaskServiceImpl implements TaskService {
             return 0;
         }
         return (int)Math.ceil(tasks.size() * 1.0 / RECORDS_PER_PAGE);
+    }
+
+    @Override
+    public boolean setDone(Long taskId) {
+        return taskDao.updateByID(new StatusDao().getByFields(new StatusBuilder() ,Statuses.DONE).get(0).getId(), taskId);
+    }
+
+    @Override
+    public boolean setDelete(Long taskId) {
+        return taskDao.updateByID(new StatusDao().getByFields(new StatusBuilder() ,Statuses.DELETE).get(0).getId(), taskId);
     }
 }

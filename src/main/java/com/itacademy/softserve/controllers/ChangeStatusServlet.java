@@ -4,11 +4,8 @@ import com.itacademy.softserve.constant.JspUrl;
 import com.itacademy.softserve.constant.ServletUrl;
 import com.itacademy.softserve.constant.param.ControlTaskButton;
 import com.itacademy.softserve.dto.TaskDto;
-import com.itacademy.softserve.dto.UserDto;
-import com.itacademy.softserve.entity.Task;
 import com.itacademy.softserve.service.TaskService;
 import com.itacademy.softserve.service.impl.TaskServiceImpl;
-import com.itacademy.softserve.util.SessionManager;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -16,11 +13,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.ws.WebEndpoint;
 import java.io.IOException;
-import java.util.List;
 
-@WebServlet(ServletUrl.HOME_URL)
-public class HomeServlet extends HttpServlet {
+@WebServlet(ServletUrl.CHANGE_STATUS)
+public class ChangeStatusServlet extends HttpServlet {
     private TaskService taskService;
 
     @Override
@@ -32,24 +29,22 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        int page = 1;
-        if (req.getParameter("page") != null) {
-            page = Integer.parseInt(req.getParameter("page"));
-        }
-        if(SessionManager.isActiveSession(req)) {
-            UserDto userDto = (UserDto) req.getSession(false).getAttribute("userDto");
-            List<TaskDto> tasks = taskService.getPageSet(userDto, (page -1) * TaskServiceImpl.RECORDS_PER_PAGE);
-            req.setAttribute("taskList", tasks);
-            req.setAttribute("numOfPages", taskService.getNumberOfPages());
-            req.setAttribute("currentPage", page);
-            req.getRequestDispatcher(JspUrl.HOME_JSP).include(req, resp);
-        } else {
-            req.getRequestDispatcher(JspUrl.MAIN_JSP).forward(req, resp);
-        }
+        req.getRequestDispatcher(JspUrl.HOME_JSP).include(req, resp);
+        resp.sendRedirect(req.getContextPath() + ServletUrl.HOME_URL);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String action = request.getParameter(ControlTaskButton.DONE);
+        Long taskId;
+        if(action != null) {
+            taskId = Long.parseLong(request.getParameter(ControlTaskButton.DONE));
+            taskService.setDone(taskId);
+        } else {
+            taskId = Long.parseLong(request.getParameter(ControlTaskButton.DELETE));
+            taskService.setDelete(taskId);
+        }
+        doGet(request, response);
     }
 }

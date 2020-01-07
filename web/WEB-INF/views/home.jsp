@@ -16,8 +16,6 @@
     <title>Home Page</title>
 </head>
 <body>
-
-<h1>Welcome!</h1>
 <jsp:include page="header.jsp"/>
 <div class="container">
     <br/>
@@ -26,7 +24,8 @@
             <form class="card card-sm">
                 <div class="card-body row no-gutters align-items-center">
                     <div class="col">
-                        <input class="form-control form-control-lg form-control-borderless" type="search" placeholder="Search task">
+                        <input class="form-control form-control-lg form-control-borderless" type="search"
+                               placeholder="Search task">
                     </div>
                     <div class="col-auto">
                         <button class="btn btn-lg btn-success" type="submit">Search</button>
@@ -45,6 +44,8 @@
         <th>Creation date</th>
         <th>Deadline</th>
         <th>Owner</th>
+        <th>Done</th>
+        <th>Delete</th>
     </tr>
     </thead>
 
@@ -56,8 +57,17 @@
             <td>${task.creationDate}</td>
             <td>${task.deadline}</td>
             <td>${task.owner}</td>
+            <form action="${pageContext.request.contextPath}/change-status" method="post">
+                <th>
+                    <button type="submit" name="DONE" class="btn btn-success" value="${task.taskID}"></button>
+                </th>
+                <th>
+                    <button type="submit" name="DELETE" class="btn btn-danger" value="${task.taskID}"></button>
+                </th>
+            </form>
         </tr>
     </c:forEach>
+
 </table>
 
 <c:if test="${currentPage != 1}">

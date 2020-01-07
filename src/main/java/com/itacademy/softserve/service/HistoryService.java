@@ -9,4 +9,5 @@ public interface HistoryService {
     List<HistoryDto> getHistorySet(UserDto userDto, int begin);
     boolean delete(Long userId);
     int getNumberOfPages();
+    boolean deleteRecord(Long id);
 }

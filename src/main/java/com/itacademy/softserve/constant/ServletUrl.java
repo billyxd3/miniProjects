@@ -10,4 +10,6 @@ public interface ServletUrl {
     String LOG_OUT_URL = "/log-out";
     String HISTORY_URL = "/history";
     String ADD_TASK_URL = "/add-task";
+    String CHANGE_STATUS = "/change-status";
+    String CLEAR_HISTORY = "/clear-history";
 }

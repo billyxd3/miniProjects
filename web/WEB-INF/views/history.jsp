@@ -16,7 +16,6 @@
     <title>History</title>
 </head>
 <body>
-<h1>History</h1>
 <jsp:include page="header.jsp"/>
 
 <table class="table">
@@ -26,15 +25,20 @@
         <th>Task</th>
         <th>Modified Date</th>
         <th>Status</th>
+        <th>Delete</th>
     </tr>
     </thead>
-
     <c:forEach var="history_record" items="${historyList}">
         <tr>
             <td>${history_record.id}</td>
             <td>${history_record.task}</td>
             <td>${history_record.modifiedDate}</td>
             <td>${history_record.status}</td>
+            <form action="${pageContext.request.contextPath}/clear-history" method="post">
+                <th>
+                    <button type="submit" name="DELETE" class="btn btn-danger" value="${history_record.id}"></button>
+                </th>
+            </form>
         </tr>
     </c:forEach>
 </table>
