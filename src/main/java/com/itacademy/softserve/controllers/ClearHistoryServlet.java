@@ -2,7 +2,6 @@ package com.itacademy.softserve.controllers;
 
 import com.itacademy.softserve.constant.JspUrl;
 import com.itacademy.softserve.constant.ServletUrl;
-import com.itacademy.softserve.constant.param.ControlTaskButton;
 import com.itacademy.softserve.service.HistoryService;
 import com.itacademy.softserve.service.impl.HistoryServiceImpl;
 
@@ -13,7 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-@WebServlet(ServletUrl.CLEAR_HISTORY)
+@WebServlet(ServletUrl.DELETE_RECORD)
 public class ClearHistoryServlet extends HttpServlet {
     private HistoryService historyService;
 
@@ -33,7 +32,7 @@ public class ClearHistoryServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        historyService.deleteRecord(Long.parseLong(request.getParameter(ControlTaskButton.DELETE)));
+        historyService.clear(request);
         doGet(request, response);
     }
 }

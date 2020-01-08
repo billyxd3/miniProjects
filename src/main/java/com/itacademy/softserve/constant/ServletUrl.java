@@ -11,6 +11,7 @@ public interface ServletUrl {
     String HISTORY_URL = "/history";
     String ADD_TASK_URL = "/add-task";
     String CHANGE_STATUS = "/change-status";
-    String CLEAR_HISTORY = "/clear-history";
+    String DELETE_RECORD = "/delete-record";
     String SEARCH_TASK = "/search-task";
+    String CLEAR_HISTORY = "/clear-history";
 }

@@ -17,6 +17,22 @@
 </head>
 <body>
 <jsp:include page="fragments/header.jsp"/>
+<div class="row justify-content-left">
+    <form class="card card-sm" action="${pageContext.request.contextPath}/delete-record" method="post">
+        <button type="submit" name="CLEAR" class="btn btn-danger" value="${history_record.id}">Clear history</button>
+    </form>
+
+    <form class="card card-sm" action="${pageContext.request.contextPath}/history" method="post">
+        <select class="selectpicker" data-style="btn-info" name="period">
+            <option value="today">Today</option>
+            <option value="last week">Last week</option>
+            <option value="last month">Last month</option>
+            <option value="last year">Last year</option>
+            <option value="all">All</option>
+        </select>
+        <button type="submit" class="btn btn-info">Show</button>
+    </form>
+</div>
 
 <table class="table">
     <thead class="thead-dark">
@@ -34,9 +50,10 @@
             <td>${history_record.task}</td>
             <td>${history_record.modifiedDate}</td>
             <td>${history_record.status}</td>
-            <form action="${pageContext.request.contextPath}/clear-history" method="post">
+            <form action="${pageContext.request.contextPath}/delete-record" method="post">
                 <th>
-                    <button type="submit" name="DELETE" class="btn btn-danger" value="${history_record.id}">DELETE</button>
+                    <button type="submit" name="DELETE" class="btn btn-danger" value="${history_record.id}">DELETE
+                    </button>
                 </th>
             </form>
         </tr>
