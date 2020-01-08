@@ -10,7 +10,7 @@ import com.itacademy.softserve.entity.History;
 
 public class HistoryDtoMapper implements DtoMapper<HistoryDto> {
     @Override
-    public HistoryDto mapToDto(Entity entity) {
+    public HistoryDto mapFromEntityToDto(Entity entity) {
         History history = (History) entity;
         HistoryDto historyDto = new HistoryDto();
         historyDto.setId(history.getId());

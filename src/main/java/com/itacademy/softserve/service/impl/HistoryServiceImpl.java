@@ -86,7 +86,7 @@ public class HistoryServiceImpl implements HistoryService {
             end = historyList.size();
         }
         for (History historyRecord : historyList.subList(begin, end)) {
-            historyGroup.add(new HistoryDtoMapper().mapToDto(historyRecord));
+            historyGroup.add(new HistoryDtoMapper().mapFromEntityToDto(historyRecord));
         }
         return historyGroup;
     }

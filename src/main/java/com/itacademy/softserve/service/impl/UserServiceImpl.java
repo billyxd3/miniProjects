@@ -9,7 +9,6 @@ import com.itacademy.softserve.exception.NotFoundException;
 import com.itacademy.softserve.exception.NotSaveException;
 import com.itacademy.softserve.service.UserService;
 
-import java.awt.image.AreaAveragingScaleFilter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -64,7 +63,7 @@ public class UserServiceImpl implements UserService {
     public List<UserDto> getAll() {
         List<UserDto> users = new ArrayList<>();
         UserDtoMapper userDtoMapper = new UserDtoMapper();
-        userDao.getAll(new UserBuilder()).forEach(user->users.add(userDtoMapper.mapToDto(user)));
+        userDao.getAll(new UserBuilder()).forEach(user->users.add(userDtoMapper.mapFromEntityToDto(user)));
         return users;
     }
 }

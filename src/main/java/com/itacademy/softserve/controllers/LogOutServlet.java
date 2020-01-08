@@ -18,7 +18,6 @@ public class LogOutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        resp.setContentType("text/html");
         req.getRequestDispatcher(JspUrl.MAIN_JSP).include(req, resp);
         SessionManager.destroySession(req, resp);
         resp.sendRedirect(req.getContextPath() + ServletUrl.MAIN_URL);

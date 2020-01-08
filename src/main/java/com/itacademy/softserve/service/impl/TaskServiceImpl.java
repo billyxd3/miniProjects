@@ -1,6 +1,5 @@
 package com.itacademy.softserve.service.impl;
 
-import com.itacademy.softserve.constant.JspUrl;
 import com.itacademy.softserve.constant.NumberOfRecordsPerPage;
 import com.itacademy.softserve.constant.Statuses;
 import com.itacademy.softserve.dao.StatusDao;
@@ -14,10 +13,7 @@ import com.itacademy.softserve.dto.UserDto;
 import com.itacademy.softserve.dto.mapper.TaskDtoMapper;
 import com.itacademy.softserve.entity.Task;
 import com.itacademy.softserve.service.TaskService;
-import com.itacademy.softserve.util.SessionManager;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -93,7 +89,7 @@ public class TaskServiceImpl implements TaskService {
             end = tasks.size();
         }
         for (Task task : tasks.subList(begin, end)) {
-            taskGroup.add(new TaskDtoMapper().mapToDto(task));
+            taskGroup.add(new TaskDtoMapper().mapFromEntityToDto(task));
         }
         return taskGroup;
     }
