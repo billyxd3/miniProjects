@@ -1,5 +1,6 @@
 package com.itacademy.softserve.service.impl;
 
+import com.itacademy.softserve.constant.NumberOfRecordsPerPage;
 import com.itacademy.softserve.dao.HistoryDao;
 import com.itacademy.softserve.dao.TaskDao;
 import com.itacademy.softserve.dao.UserDao;
@@ -14,13 +15,11 @@ import com.itacademy.softserve.entity.Task;
 import com.itacademy.softserve.service.HistoryService;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class HistoryServiceImpl implements HistoryService {
     private List<History> historyList;
     private HistoryDao historyDao;
-    public static final int RECORDS_PER_PAGE = 10;
 
     public HistoryServiceImpl() {
         historyDao = new HistoryDao();
@@ -28,7 +27,7 @@ public class HistoryServiceImpl implements HistoryService {
 
     @Override
     public List<HistoryDto> getHistorySet(UserDto userDto, int begin) {
-        int end = begin + RECORDS_PER_PAGE;
+        int end = begin + NumberOfRecordsPerPage.HISTORY_RECORD_PER_PAGE;
         Long userId = new UserDao().getByFields(new UserBuilder(), userDto.getName()).get(0).getId();
   //      if(historyList == null) {
             historyList = historyDao.getAll(new HistoryBuilder(), userId);
@@ -54,7 +53,7 @@ public class HistoryServiceImpl implements HistoryService {
         if(historyList == null) {
             return 0;
         }
-        return (int)Math.ceil(historyList.size() * 1.0 / RECORDS_PER_PAGE);
+        return (int)Math.ceil(historyList.size() * 1.0 / NumberOfRecordsPerPage.HISTORY_RECORD_PER_PAGE);
     }
 
     @Override

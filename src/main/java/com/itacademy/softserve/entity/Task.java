@@ -12,7 +12,7 @@ public class Task extends Entity {
         GET_ALL(SqlQueries.GET_ALL, "SELECT TaskID, Assignee, Owner, Description, CreationDate," +
                                 " Deadline, StatusID FROM tasks WHERE (Assignee = ? OR Owner = ?) AND NOT StatusID = ?;"),
         GET_BY_REGEX(SqlQueries.GET_BY_REGEX, "SELECT TaskID, Assignee, Owner, Description," +
-                " CreationDate, Deadline, StatusID FROM tasks WHERE Description LIKE "),
+                " CreationDate, Deadline, StatusID FROM tasks WHERE Assignee = ? AND NOT StatusID = ? AND Description LIKE "),
         INSERT(SqlQueries.INSERT, "INSERT INTO tasks (Assignee, Owner, Description, CreationDate, Deadline, StatusID) " +
                 "VALUES (?, ?, ?, ?, ?, ?);"),
         UPDATE_BY_ID(SqlQueries.UPDATE_BY_ID, "UPDATE tasks SET StatusID = ? WHERE TaskID = ?;"),

@@ -12,4 +12,5 @@ public interface ServletUrl {
     String ADD_TASK_URL = "/add-task";
     String CHANGE_STATUS = "/change-status";
     String CLEAR_HISTORY = "/clear-history";
+    String SEARCH_TASK = "/search-task";
 }

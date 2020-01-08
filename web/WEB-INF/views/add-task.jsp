@@ -18,7 +18,7 @@
 </head>
 <body>
 <div class="page-wrapper bg-red p-t-180 p-b-100 font-robo">
-    <jsp:include page="header.jsp"/>
+    <jsp:include page="fragments/header.jsp"/>
     <div class="wrapper wrapper--w960">
         <div class="card card-2">
             <div class="card-body">

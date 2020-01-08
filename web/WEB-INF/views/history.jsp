@@ -16,7 +16,7 @@
     <title>History</title>
 </head>
 <body>
-<jsp:include page="header.jsp"/>
+<jsp:include page="fragments/header.jsp"/>
 
 <table class="table">
     <thead class="thead-dark">
@@ -36,7 +36,7 @@
             <td>${history_record.status}</td>
             <form action="${pageContext.request.contextPath}/clear-history" method="post">
                 <th>
-                    <button type="submit" name="DELETE" class="btn btn-danger" value="${history_record.id}"></button>
+                    <button type="submit" name="DELETE" class="btn btn-danger" value="${history_record.id}">DELETE</button>
                 </th>
             </form>
         </tr>

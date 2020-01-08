@@ -34,15 +34,19 @@ public class TaskDao extends DaoCrudA<Task> {
         return fields;
     }
 
-    public List<Task> getByRegex(InstanceBuilder<Task> builder, String regex) {
+    public List<Task> getByRegex(InstanceBuilder<Task> builder, Long userId, Long statusId, String regex) {
         Connection connection = ConnectionFactory.getConnectionFactory().getConnection();
         StringBuilder query = new StringBuilder(sqlQueries.get(SqlQueries.GET_BY_REGEX).toString())
                 .append("'%")
                 .append(regex)
                 .append("%';");
 
-        return CrudUtils.getEntityList(connection, query.toString(), builder, regex);
+        return CrudUtils.getEntityList(connection, query.toString(), builder, userId, statusId);
     }
+
+//    public static void main(String[] args) {
+//        System.out.println(new TaskDao().getByRegex(new TaskBuilder(), 1L, 5L, "to11").get(0));
+//    }
 
     @Override
     public boolean updateByField(Object... fieldsValues) {
