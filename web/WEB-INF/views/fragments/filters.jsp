@@ -26,9 +26,9 @@
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="filterBy" value="date">
                 <div class="input-group">
-                    <input placeholder="FROM" class="form-control" type="text" onfocus="(this.type='date')"
+                    <input placeholder="FROM" class="form-control" type="text" name="from" onfocus="(this.type='date')"
                            onblur="(this.type='text')">
-                    <input placeholder="To" class="form-control" type="text" onfocus="(this.type='date')"
+                    <input placeholder="To" class="form-control" type="text" name="to" onfocus="(this.type='date')"
                            onblur="(this.type='text')">
                 </div>
             </div>

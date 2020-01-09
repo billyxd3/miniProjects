@@ -1,11 +1,8 @@
 package com.itacademy.softserve.service;
 
-import com.itacademy.softserve.dao.TaskDao;
 import com.itacademy.softserve.dto.TaskDto;
 import com.itacademy.softserve.dto.UserDto;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 public interface TaskService {
@@ -22,5 +19,11 @@ public interface TaskService {
     boolean setDelete(Long taskId);
 
     List<TaskDto> getSearchSet(UserDto userDto, String regex, int begin);
+
+    List<TaskDto> getFilteredByOwnerSet(String assignee, String owner, int begin);
+
+    List<TaskDto> getFilteredByDateSet(String userName, String beginDate, String endDate, int begin);
+
+    List<TaskDto> getFilteredByStatusSet(String userName, String status, int begin);
 }
 

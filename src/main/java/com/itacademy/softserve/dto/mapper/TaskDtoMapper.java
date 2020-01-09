@@ -13,6 +13,8 @@ import com.itacademy.softserve.entity.Task;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class TaskDtoMapper implements DtoMapper<TaskDto> {
     @Override
@@ -40,5 +42,11 @@ public class TaskDtoMapper implements DtoMapper<TaskDto> {
         taskDto.setDeadline(Date.valueOf(request.getParameter("deadline")));
         taskDto.setStatus(Statuses.CREATED);
         return taskDto;
+    }
+
+    public List<TaskDto> mapToDtoList(List<Task> tasks) {
+        return tasks.stream()
+                .map(this::mapFromEntityToDto)
+                .collect(Collectors.toList());
     }
 }

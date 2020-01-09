@@ -14,7 +14,7 @@
 <body>
 <div class="input-group">
     <select name="users">
-        <option selected disabled>Assignee</option>
+        <option selected disabled>User</option>
         <c:forEach items="${users}" var="user">
             <option value="${user.name}">${user.name}</option>
         </c:forEach>

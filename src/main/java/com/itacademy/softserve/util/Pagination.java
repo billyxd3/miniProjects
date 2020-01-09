@@ -3,9 +3,11 @@ package com.itacademy.softserve.util;
 import com.itacademy.softserve.constant.JspUrl;
 import com.itacademy.softserve.constant.NumberOfRecordsPerPage;
 import com.itacademy.softserve.constant.param.FilterTypes;
+import com.itacademy.softserve.dao.filter.TaskFilter;
 import com.itacademy.softserve.dto.HistoryDto;
 import com.itacademy.softserve.dto.TaskDto;
 import com.itacademy.softserve.dto.UserDto;
+import com.itacademy.softserve.dto.mapper.TaskDtoMapper;
 import com.itacademy.softserve.service.HistoryService;
 import com.itacademy.softserve.service.TaskService;
 import com.itacademy.softserve.service.impl.HistoryServiceImpl;
@@ -15,6 +17,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Pagination {
@@ -49,9 +52,9 @@ public class Pagination {
         if (request.getParameter("page") != null) {
             page = Integer.parseInt(request.getParameter("page"));
         }
-        if(SessionManager.isActiveSession(request)) {
+        if (SessionManager.isActiveSession(request)) {
             UserDto userDto = (UserDto) request.getSession(false).getAttribute("userDto");
-            List<TaskDto> tasks = taskService.getSearchSet(userDto, regex, (page -1) * NumberOfRecordsPerPage.TASK_RECORD_PER_PAGE);
+            List<TaskDto> tasks = taskService.getSearchSet(userDto, regex, (page - 1) * NumberOfRecordsPerPage.TASK_RECORD_PER_PAGE);
             request.setAttribute("taskList", tasks);
             request.setAttribute("numOfPages", taskService.getNumberOfPages());
             request.setAttribute("currentPage", page);
@@ -80,18 +83,24 @@ public class Pagination {
         }
     }
 
-    private List<TaskDto> determineFilter(UserDto userDto, int begin , HttpServletRequest request) {
+    private List<TaskDto> determineFilter(UserDto userDto, int begin, HttpServletRequest request) {
+        TaskDtoMapper taskDtoMapper = new TaskDtoMapper();
+        TaskFilter taskFilter = new TaskFilter();
         String filter = request.getParameter(FilterTypes.FILTER_CHECK);
-        switch (filter) {
-            case FilterTypes.BY_OWNER:
-                break;
-            case FilterTypes.BY_DATE:
-                break;
-            case FilterTypes.BY_STATUS:
-                break;
-            default:
-                return taskService.getPageSet(userDto, begin);
+        if (filter == null) {
+            return taskService.getPageSet(userDto, begin);
+        } else if (filter.equals(FilterTypes.BY_OWNER)) {
+            String owner = request.getParameter("users");
+            return taskService.getFilteredByOwnerSet(userDto.getName(), owner, begin);
+        } else if (filter.equals(FilterTypes.BY_DATE)) {
+            String beginDate = request.getParameter("from");
+            String endDate = request.getParameter("to");
+            return taskService.getFilteredByDateSet(userDto.getName(), beginDate, endDate, begin);
+        } else if (filter.equals(FilterTypes.BY_STATUS)) {
+            String status = request.getParameter("statuses");
+            return taskService.getFilteredByStatusSet(userDto.getName(), status, begin);
+        } else {
+            return new ArrayList<TaskDto>();
         }
-        return null;
     }
 }

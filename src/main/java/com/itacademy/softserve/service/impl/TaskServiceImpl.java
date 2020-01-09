@@ -8,26 +8,33 @@ import com.itacademy.softserve.dao.UserDao;
 import com.itacademy.softserve.dao.builder.StatusBuilder;
 import com.itacademy.softserve.dao.builder.TaskBuilder;
 import com.itacademy.softserve.dao.builder.UserBuilder;
+import com.itacademy.softserve.dao.filter.TaskFilter;
 import com.itacademy.softserve.dto.TaskDto;
 import com.itacademy.softserve.dto.UserDto;
 import com.itacademy.softserve.dto.mapper.TaskDtoMapper;
+import com.itacademy.softserve.entity.Status;
 import com.itacademy.softserve.entity.Task;
 import com.itacademy.softserve.service.TaskService;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TaskServiceImpl implements TaskService {
     private List<Task> tasks;
-    private TaskDao taskDao = new TaskDao();
+    private TaskDao taskDao;
+    private UserDao userDao;
+    private UserBuilder userBuilder;
 
     public TaskServiceImpl() {
         taskDao = new TaskDao();
+        userDao = new UserDao();
+        userBuilder = new UserBuilder();
     }
 
     @Override
     public List<TaskDto> getPageSet(UserDto userDto, int begin) {
-        Long userId = new UserDao().getByFields(new UserBuilder(), userDto.getName()).get(0).getId();
+        Long userId = userDao.getByFields(userBuilder, userDto.getName()).get(0).getId();
         tasks = taskDao.getAll(new TaskBuilder(), userId, userId,
                 new StatusDao().getByFields(new StatusBuilder(), Statuses.DELETE).get(0).getId());
         return getSet(begin);
@@ -76,9 +83,34 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public List<TaskDto> getSearchSet(UserDto userDto, String regex, int begin) {
-        Long userId = new UserDao().getByFields(new UserBuilder(), userDto.getName()).get(0).getId();
+        Long userId = userDao.getByFields(new UserBuilder(), userDto.getName()).get(0).getId();
         tasks = taskDao.getByRegex(new TaskBuilder(), userId,
                 new StatusDao().getByFields(new StatusBuilder(), Statuses.DELETE).get(0).getId(), regex);
+        return getSet(begin);
+    }
+
+    @Override
+    public List<TaskDto> getFilteredByOwnerSet(String assignee, String owner, int begin) {
+        Long assigneeId = userDao.getByFields(userBuilder, assignee).get(0).getId();
+        Long ownerId = userDao.getByFields(userBuilder, owner).get(0).getId();
+        tasks = new TaskFilter().filterByOwner(new TaskBuilder(), assigneeId, ownerId,
+                new StatusDao().getByFields(new StatusBuilder(), Statuses.DELETE).get(0).getId().intValue());
+        return getSet(begin);
+    }
+
+    @Override
+    public List<TaskDto> getFilteredByDateSet(String userName, String beginDate, String endDate, int begin) {
+        Long userId = userDao.getByFields(userBuilder, userName).get(0).getId();
+        tasks = new TaskFilter().filterByDate(new TaskBuilder(), userId, Date.valueOf(beginDate),
+                Date.valueOf(endDate), new StatusDao().getByFields(new StatusBuilder(), Statuses.DELETE).get(0).getId());
+        return getSet(begin);
+    }
+
+    @Override
+    public List<TaskDto> getFilteredByStatusSet(String userName, String status, int begin) {
+        Long userId = userDao.getByFields(new UserBuilder(), userName).get(0).getId();
+        Integer statusId = new StatusDao().getByFields(new StatusBuilder(), status).get(0).getId().intValue();
+        tasks = new TaskFilter().filterByStatus(new TaskBuilder(), userId, statusId);
         return getSet(begin);
     }
 
