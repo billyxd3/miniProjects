@@ -2,6 +2,7 @@ package com.itacademy.softserve.util;
 
 import com.itacademy.softserve.constant.JspUrl;
 import com.itacademy.softserve.constant.NumberOfRecordsPerPage;
+import com.itacademy.softserve.constant.param.FilterTypes;
 import com.itacademy.softserve.dto.HistoryDto;
 import com.itacademy.softserve.dto.TaskDto;
 import com.itacademy.softserve.dto.UserDto;
@@ -31,7 +32,8 @@ public class Pagination {
         int page = getPage(request);
         if (SessionManager.isActiveSession(request)) {
             UserDto userDto = (UserDto) request.getSession(false).getAttribute("userDto");
-            List<TaskDto> tasks = taskService.getPageSet(userDto, (page - 1) * NumberOfRecordsPerPage.TASK_RECORD_PER_PAGE);
+            int begin = (page - 1) * NumberOfRecordsPerPage.TASK_RECORD_PER_PAGE;
+            List<TaskDto> tasks = determineFilter(userDto, begin, request);
             request.setAttribute("taskList", tasks);
             request.setAttribute("numOfPages", taskService.getNumberOfPages());
             request.setAttribute("currentPage", page);
@@ -76,5 +78,20 @@ public class Pagination {
         } else {
             request.getRequestDispatcher(JspUrl.MAIN_JSP).forward(request, response);
         }
+    }
+
+    private List<TaskDto> determineFilter(UserDto userDto, int begin , HttpServletRequest request) {
+        String filter = request.getParameter(FilterTypes.FILTER_CHECK);
+        switch (filter) {
+            case FilterTypes.BY_OWNER:
+                break;
+            case FilterTypes.BY_DATE:
+                break;
+            case FilterTypes.BY_STATUS:
+                break;
+            default:
+                return taskService.getPageSet(userDto, begin);
+        }
+        return null;
     }
 }

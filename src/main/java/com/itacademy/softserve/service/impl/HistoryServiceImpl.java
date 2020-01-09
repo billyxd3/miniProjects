@@ -35,13 +35,13 @@ public class HistoryServiceImpl implements HistoryService {
     @Override
     public List<HistoryDto> getHistorySet(UserDto userDto, String period, int begin) {
         Long userId = new UserDao().getByFields(new UserBuilder(), userDto.getName()).get(0).getId();
-        if(period.equals(HistoryPeriod.TODAY)) {
+        if (period.equals(HistoryPeriod.TODAY)) {
             historyList = historyFilter.getToday(userId);
-        } else if(period.equals(HistoryPeriod.LAST_WEEK)) {
+        } else if (period.equals(HistoryPeriod.LAST_WEEK)) {
             historyList = historyFilter.getLastWeek(userId);
-        } else if(period.equals(HistoryPeriod.LAST_MONTH)) {
+        } else if (period.equals(HistoryPeriod.LAST_MONTH)) {
             historyList = historyFilter.getLastMonth(userId);
-        } else if(period.equals(HistoryPeriod.LAST_YEAR)) {
+        } else if (period.equals(HistoryPeriod.LAST_YEAR)) {
             historyList = historyFilter.getLastYear(userId);
         } else {
             historyList = historyDao.getAll(new HistoryBuilder(), userId);
@@ -55,13 +55,13 @@ public class HistoryServiceImpl implements HistoryService {
         if (historyList == null) {
             return 0;
         }
-        return (int) Math.ceil(historyList.size() * 1.0 / NumberOfRecordsPerPage.HISTORY_RECORD_PER_PAGE);
+        return (int) Math.ceil((double) historyList.size() / NumberOfRecordsPerPage.HISTORY_RECORD_PER_PAGE);
     }
 
     @Override
     public boolean clear(HttpServletRequest request) {
         String action = request.getParameter(ControlTaskButton.DELETE);
-        if(action != null) {
+        if (action != null) {
             return historyDao.deleteByID(Long.parseLong(request.getParameter(ControlTaskButton.DELETE)));
         } else {
             UserDto userDto = (UserDto) request.getSession(false).getAttribute("userDto");
@@ -90,4 +90,4 @@ public class HistoryServiceImpl implements HistoryService {
         }
         return historyGroup;
     }
- }
+}

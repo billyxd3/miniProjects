@@ -14,4 +14,5 @@ public interface ServletUrl {
     String DELETE_RECORD = "/delete-record";
     String SEARCH_TASK = "/search-task";
     String CLEAR_HISTORY = "/clear-history";
+    String FILTER_TASK_URL = "/filter-task";
 }

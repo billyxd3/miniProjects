@@ -24,6 +24,7 @@
 
     <form class="card card-sm" action="${pageContext.request.contextPath}/history" method="post">
         <select class="selectpicker" data-style="btn-info" name="period">
+            <option selected disabled>Period</option>
             <option value="today">Today</option>
             <option value="last week">Last week</option>
             <option value="last month">Last month</option>
@@ -61,18 +62,18 @@
 </table>
 
 <c:if test="${currentPage != 1}">
-    <td><a href="history?page=${currentPage - 1}">Previous</a></td>
+    <td><a class="btn btn-info" href="history?page=${currentPage - 1}">Previous</a></td>
 </c:if>
-<table border="1" cellpadding="5" cellspacing="5">
+<table>
     <thead class="thead-dark">
     <tr>
         <c:forEach begin="1" end="${numOfPages}" var="i">
             <c:choose>
                 <c:when test="${currentPage eq i}">
-                    <td>${i}</td>
+                    <td><div class="btn btn-secondary">${i}</div></td>
                 </c:when>
                 <c:otherwise>
-                    <td><a href="history?page=${i}">${i}</a></td>
+                    <td><a class="btn btn-primary" href="history?page=${i}">${i}</a></td>
                 </c:otherwise>
             </c:choose>
         </c:forEach>
@@ -80,7 +81,7 @@
     </thead>
 </table>
 <c:if test="${currentPage lt numOfPages}">
-    <td><a href="history?page=${currentPage + 1}">Next</a></td>
+    <td><a class="btn btn-info" href="history?page=${currentPage + 1}">Next</a></td>
 </c:if>
 
 </body>

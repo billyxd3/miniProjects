@@ -36,30 +36,33 @@
     </div>
 </div>
 
+<jsp:include page="fragments/filters.jsp"/>
 <jsp:include page="fragments/task-table.jsp"/>
-
-<c:if test="${currentPage != 1}">
-    <td><a href="home?page=${currentPage - 1}">Previous</a></td>
-</c:if>
-<table border="1" cellpadding="5" cellspacing="5">
-    <thead class="thead-dark">
-    <tr>
-        <c:forEach begin="1" end="${numOfPages}" var="i">
-            <c:choose>
-                <c:when test="${currentPage eq i}">
-                    <td>${i}</td>
-                </c:when>
-                <c:otherwise>
-                    <td><a href="home?page=${i}">${i}</a></td>
-                </c:otherwise>
-            </c:choose>
-        </c:forEach>
-    </tr>
-    </thead>
-</table>
-<c:if test="${currentPage lt numOfPages}">
-    <td><a href="home?page=${currentPage + 1}">Next</a></td>
-</c:if>
-
+<div style="display: flex; justify-content: center;">
+    <c:if test="${currentPage != 1}">
+        <td><a class="btn btn-info" href="home?page=${currentPage - 1}">Previous</a></td>
+    </c:if>
+    <table>
+        <thead class="thead-dark">
+        <tr>
+            <c:forEach begin="1" end="${numOfPages}" var="i">
+                <c:choose>
+                    <c:when test="${currentPage eq i}">
+                        <td>
+                            <div class="btn btn-secondary">${i}</div>
+                        </td>
+                    </c:when>
+                    <c:otherwise>
+                        <td><a class="btn btn-primary" href="home?page=${i}">${i}</a></td>
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+        </tr>
+        </thead>
+    </table>
+    <c:if test="${currentPage lt numOfPages}">
+        <td><a class="btn btn-info" href="home?page=${currentPage + 1}">Next</a></td>
+    </c:if>
+</div>
 </body>
 </html>

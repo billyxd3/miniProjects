@@ -20,9 +20,9 @@
 <jsp:include page="fragments/task-table.jsp"/>
 
 <c:if test="${currentPage != 1}">
-    <td><a href="search-task?page=${currentPage - 1}">Previous</a></td>
+    <td><a class="btn btn-info" href="search-task?page=${currentPage - 1}">Previous</a></td>
 </c:if>
-<table border="1" cellpadding="5" cellspacing="5">
+<table>
     <thead class="thead-dark">
     <tr>
         <c:forEach begin="1" end="${numOfPages}" var="i">
@@ -31,7 +31,7 @@
                     <td>${i}</td>
                 </c:when>
                 <c:otherwise>
-                    <td><a href="search-task?page=${i}">${i}</a></td>
+                    <td><a class="btn btn-primary" href="search-task?page=${i}">${i}</a></td>
                 </c:otherwise>
             </c:choose>
         </c:forEach>
@@ -39,7 +39,7 @@
     </thead>
 </table>
 <c:if test="${currentPage lt numOfPages}">
-    <td><a href="search-task?page=${currentPage + 1}">Next</a></td>
+    <td><a class="btn btn-info" href="search-task?page=${currentPage + 1}">Next</a></td>
 </c:if>
 </body>
 </html>
