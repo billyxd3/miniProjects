@@ -6,7 +6,6 @@ import com.itacademy.softserve.service.UserService;
 import com.itacademy.softserve.service.impl.UserServiceImpl;
 import com.itacademy.softserve.util.Pagination;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,7 +21,7 @@ public class HomeServlet extends HttpServlet {
     private String description;
 
     @Override
-    public void init(){
+    public void init() {
         pagination = new Pagination();
         userService = new UserServiceImpl();
     }

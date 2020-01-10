@@ -19,14 +19,13 @@ public class ChangeStatusServlet extends HttpServlet {
     private TaskService taskService;
 
     @Override
-    public void init(){
+    public void init() {
         taskService = new TaskServiceImpl();
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-
         req.getRequestDispatcher(JspUrl.HOME_JSP).include(req, resp);
         resp.sendRedirect(req.getContextPath() + ServletUrl.HOME_URL);
     }
@@ -36,7 +35,7 @@ public class ChangeStatusServlet extends HttpServlet {
             throws ServletException, IOException {
         String action = request.getParameter(ControlTaskButton.DONE);
         Long taskId;
-        if(action != null) {
+        if (action != null) {
             taskId = Long.parseLong(request.getParameter(ControlTaskButton.DONE));
             taskService.setDone(taskId);
         } else {
