@@ -87,7 +87,8 @@ public class Pagination {
         TaskDtoMapper taskDtoMapper = new TaskDtoMapper();
         TaskFilter taskFilter = new TaskFilter();
         String filter = request.getParameter(FilterTypes.FILTER_CHECK);
-        if (filter == null) {
+        String reset = request.getParameter("reset");
+        if (filter == null || reset != null) {
             return taskService.getPageSet(userDto, begin);
         } else if (filter.equals(FilterTypes.BY_OWNER)) {
             String owner = request.getParameter("users");

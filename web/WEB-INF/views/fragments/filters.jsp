@@ -43,6 +43,7 @@
                 </select>
             </div>
             <button type="submit" class="btn btn-info">Filter</button>
+            <button type="submit" class="btn btn-secondary" name="reset">Reset Filter</button>
         </form>
     </div>
 </div>
