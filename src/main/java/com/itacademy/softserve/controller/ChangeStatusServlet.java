@@ -1,9 +1,8 @@
-package com.itacademy.softserve.controllers;
+package com.itacademy.softserve.controller;
 
 import com.itacademy.softserve.constant.JspUrl;
 import com.itacademy.softserve.constant.ServletUrl;
 import com.itacademy.softserve.constant.param.ControlTaskButton;
-import com.itacademy.softserve.dto.TaskDto;
 import com.itacademy.softserve.service.TaskService;
 import com.itacademy.softserve.service.impl.TaskServiceImpl;
 
@@ -13,7 +12,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.ws.WebEndpoint;
 import java.io.IOException;
 
 @WebServlet(ServletUrl.CHANGE_STATUS)
@@ -21,8 +19,7 @@ public class ChangeStatusServlet extends HttpServlet {
     private TaskService taskService;
 
     @Override
-    public void init(ServletConfig config) throws ServletException {
-        super.init(config);
+    public void init(){
         taskService = new TaskServiceImpl();
     }
 

@@ -12,7 +12,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-    <a href="#" class="navbar-brand">User</a>
+    <a href="#" class="navbar-brand">${pageContext.session.getAttribute("userDto").name}</a>
     <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -24,6 +24,7 @@
             <a href="history" class="nav-item nav-link active">History</a>
         </div>
         <div class="navbar-nav">
+            <a href="log-out" class="nav-item nav-link">Edit user</a>
             <a href="log-out" class="nav-item nav-link">Sign out</a>
         </div>
     </div>

@@ -12,10 +12,13 @@ import com.itacademy.softserve.dao.filter.TaskFilter;
 import com.itacademy.softserve.dto.TaskDto;
 import com.itacademy.softserve.dto.UserDto;
 import com.itacademy.softserve.dto.mapper.TaskDtoMapper;
-import com.itacademy.softserve.entity.Status;
 import com.itacademy.softserve.entity.Task;
+import com.itacademy.softserve.entity.User;
 import com.itacademy.softserve.service.TaskService;
+import com.itacademy.softserve.util.SessionManager;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -82,6 +85,21 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    public boolean edit(HttpServletRequest request, String description) {
+        if(SessionManager.isActiveSession(request)) {
+            Long userId = determineAssignee(request);
+            Long taskId = Long.parseLong(request.getParameter("confirm"));
+            String newDescription = request.getParameter("newDescription");
+            if(newDescription.equals("")) {
+                newDescription = description;
+            }
+            return taskDao.updateByField(userId, newDescription, taskId);
+        } else {
+            return false;
+        }
+    }
+
+    @Override
     public List<TaskDto> getSearchSet(UserDto userDto, String regex, int begin) {
         Long userId = userDao.getByFields(new UserBuilder(), userDto.getName()).get(0).getId();
         tasks = taskDao.getByRegex(new TaskBuilder(), userId,
@@ -125,4 +143,16 @@ public class TaskServiceImpl implements TaskService {
         }
         return taskGroup;
     }
+
+    private Long determineAssignee(HttpServletRequest request) {
+        String user = request.getParameter("users");
+        if(user.equals("user")) {
+            HttpSession session = request.getSession(false);
+            UserDto userDto = (UserDto) session.getAttribute("userDto");
+            return userDao.getByFields(userBuilder, userDto.getName()).get(0).getId();
+        } else {
+            return userDao.getByFields(userBuilder, user).get(0).getId();
+        }
+    }
+
 }

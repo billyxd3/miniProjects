@@ -20,7 +20,9 @@
         <th>Status</th>
         <th>Creation date</th>
         <th>Deadline</th>
+        <th>Assignee</th>
         <th>Owner</th>
+        <th>Edit</th>
         <th>Done</th>
         <th>Delete</th>
     </tr>
@@ -32,8 +34,12 @@
             <td>${task.status}</td>
             <td>${task.creationDate}</td>
             <td>${task.deadline}</td>
+            <td>${task.assignee}</td>
             <td>${task.owner}</td>
             <form action="${pageContext.request.contextPath}/change-status" method="post">
+                <th>
+                    <a href="edit-task?taskId=${task.taskID}&description=${task.description}" class="nav-item nav-link">Edit</a>
+                </th>
                 <th>
                     <button type="submit" name="DONE" class="btn btn-success" value="${task.taskID}">DONE</button>
                 </th>

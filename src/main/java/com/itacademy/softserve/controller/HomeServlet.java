@@ -1,4 +1,4 @@
-package com.itacademy.softserve.controllers;
+package com.itacademy.softserve.controller;
 
 import com.itacademy.softserve.constant.ServletUrl;
 import com.itacademy.softserve.dto.UserDto;
@@ -19,10 +19,10 @@ import java.util.List;
 public class HomeServlet extends HttpServlet {
     private Pagination pagination;
     private UserService userService;
+    private String description;
 
     @Override
-    public void init(ServletConfig config) throws ServletException {
-        super.init(config);
+    public void init(){
         pagination = new Pagination();
         userService = new UserServiceImpl();
     }

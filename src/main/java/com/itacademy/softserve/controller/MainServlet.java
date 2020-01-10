@@ -1,4 +1,4 @@
-package com.itacademy.softserve.controllers;
+package com.itacademy.softserve.controller;
 
 import com.itacademy.softserve.constant.JspUrl;
 import com.itacademy.softserve.constant.ServletUrl;
@@ -15,11 +15,10 @@ import java.io.IOException;
 @WebServlet(ServletUrl.MAIN_URL)
 public class MainServlet extends HttpServlet {
     @Override
-    public void init(ServletConfig config) throws ServletException {
-        super.init(config);
+    public void init() {
     }
 
-    @Override
+        @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         req.getRequestDispatcher(JspUrl.MAIN_JSP).include(req, resp);

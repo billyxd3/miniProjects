@@ -43,17 +43,4 @@ public class TaskDao extends DaoCrudA<Task> {
 
         return CrudUtils.getEntityList(connection, query.toString(), builder, userId, statusId);
     }
-
-//    public static void main(String[] args) {
-//        System.out.println(new TaskDao().getByRegex(new TaskBuilder(), 1L, 5L, "to11").get(0));
-//    }
-
-    @Override
-    public boolean updateByField(Object... fieldsValues) {
-        Connection connection = ConnectionFactory.getConnectionFactory().getConnection();
-        String query = String.format(sqlQueries.get(SqlQueries.UPDATE_BY_FIELD).toString(),
-                fieldsValues[0], fieldsValues[1], fieldsValues[2], fieldsValues[3]);
-        int status = CrudUtils.update(connection, query, fieldsValues);
-        return status > 0;
-    }
 }

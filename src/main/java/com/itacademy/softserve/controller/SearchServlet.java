@@ -1,9 +1,7 @@
-package com.itacademy.softserve.controllers;
+package com.itacademy.softserve.controller;
 
-import com.itacademy.softserve.constant.HistoryPeriod;
+import com.itacademy.softserve.constant.JspUrl;
 import com.itacademy.softserve.constant.ServletUrl;
-import com.itacademy.softserve.service.HistoryService;
-import com.itacademy.softserve.service.impl.HistoryServiceImpl;
 import com.itacademy.softserve.util.Pagination;
 
 import javax.servlet.ServletConfig;
@@ -14,28 +12,31 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(ServletUrl.HISTORY_URL)
-public class HistoryServlet extends HttpServlet {
+@WebServlet(ServletUrl.SEARCH_TASK)
+public class SearchServlet extends HttpServlet {
+    private String regex;
     private Pagination pagination;
-    private HistoryService historyService;
 
     @Override
-    public void init(ServletConfig config) throws ServletException {
-        super.init(config);
+    public void init(){
         pagination = new Pagination();
-        historyService = new HistoryServiceImpl();
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        pagination.historyPagination(req, resp, HistoryPeriod.TODAY);
+        pagination.searchPagination(req, resp, regex);
+
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String period = request.getParameter(HistoryPeriod.PERIOD);
-        pagination.historyPagination(request, response, period);
+        regex = request.getParameter("regex");
+        if(regex != null) {
+            pagination.searchPagination(request, response, regex);
+        } else {
+            request.getRequestDispatcher(JspUrl.HOME_JSP).forward(request, response);
+        }
     }
 }

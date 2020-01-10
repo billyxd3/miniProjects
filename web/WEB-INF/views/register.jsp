@@ -11,7 +11,7 @@
 <head>
     <title>Registration</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+    <link rel="icon" type="image/png" href="image/icons/favicon.ico"/>
     <link rel="stylesheet" type="text/css" href="css/util.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
@@ -19,7 +19,7 @@
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100">
-            <div class="login100-form-title" style="background-image: url(images/bg-01.jpg);">
+            <div class="login100-form-title" style="background-image: url(image/bg-01.jpg);">
 					<span class="login100-form-title-1">
 						Sign up
 					</span>

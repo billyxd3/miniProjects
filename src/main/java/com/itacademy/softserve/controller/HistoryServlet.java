@@ -1,9 +1,10 @@
-package com.itacademy.softserve.controllers;
+package com.itacademy.softserve.controller;
 
-import com.itacademy.softserve.constant.JspUrl;
+import com.itacademy.softserve.constant.HistoryPeriod;
 import com.itacademy.softserve.constant.ServletUrl;
 import com.itacademy.softserve.service.HistoryService;
 import com.itacademy.softserve.service.impl.HistoryServiceImpl;
+import com.itacademy.softserve.util.Pagination;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -12,27 +13,28 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-@WebServlet(ServletUrl.DELETE_RECORD)
-public class ClearHistoryServlet extends HttpServlet {
+
+@WebServlet(ServletUrl.HISTORY_URL)
+public class HistoryServlet extends HttpServlet {
+    private Pagination pagination;
     private HistoryService historyService;
 
     @Override
-    public void init(ServletConfig config) throws ServletException {
-        super.init(config);
+    public void init(){
+        pagination = new Pagination();
         historyService = new HistoryServiceImpl();
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        req.getRequestDispatcher(JspUrl.HISTORY_JSP).include(req, resp);
-        resp.sendRedirect(req.getContextPath() + ServletUrl.HISTORY_URL);
+        pagination.historyPagination(req, resp, HistoryPeriod.TODAY);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        historyService.clear(request);
-        doGet(request, response);
+        String period = request.getParameter(HistoryPeriod.PERIOD);
+        pagination.historyPagination(request, response, period);
     }
 }

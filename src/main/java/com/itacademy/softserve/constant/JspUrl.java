@@ -8,4 +8,5 @@ public interface JspUrl {
     String HISTORY_JSP = "/WEB-INF/views/history.jsp";
     String ADD_TASK_JSP = "/WEB-INF/views/add-task.jsp";
     String SEARCH_JSP = "/WEB-INF/views/search.jsp";
+    String EDIT_TASK = "/WEB-INF/views/edit-task.jsp";
  }

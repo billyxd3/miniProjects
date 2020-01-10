@@ -16,7 +16,7 @@ public class Task extends Entity {
         INSERT(SqlQueries.INSERT, "INSERT INTO tasks (Assignee, Owner, Description, CreationDate, Deadline, StatusID) " +
                 "VALUES (?, ?, ?, ?, ?, ?);"),
         UPDATE_BY_ID(SqlQueries.UPDATE_BY_ID, "UPDATE tasks SET StatusID = ? WHERE TaskID = ?;"),
-        UPDATE_BY_FIELD(SqlQueries.UPDATE_BY_FIELD, "UPDATE tasks SET %s = %s WHERE %s = %s;");
+        UPDATE_BY_FIELD(SqlQueries.UPDATE_BY_FIELD, "UPDATE tasks SET Assignee = ?, Description = ? WHERE TaskID  = ?;");
 
         private SqlQueries sqlQueries;
         private String query;
